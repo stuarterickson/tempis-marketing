@@ -13,7 +13,7 @@ export default function AboutPage() {
             About Tempis Labs
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400">
-            We're building the future of creative and interactive software
+            We&rsquo;re building the future of creative and interactive software
           </p>
         </div>
       </section>
@@ -31,8 +31,8 @@ export default function AboutPage() {
               to users around the world.
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              Through our flagship products, Tempis Studio and Tempis Play, we're committed to delivering 
-              exceptional experiences that make a real difference in people's lives.
+              Through our flagship products, Tempis Studio and Tempis Play, we&rsquo;re committed to delivering 
+              exceptional experiences that make a real difference in people&rsquo;s lives.
             </p>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function AboutPage() {
           <div className="border-l-4 border-foreground pl-6">
             <h3 className="text-2xl font-bold mb-3">Innovation</h3>
             <p className="text-gray-600 dark:text-gray-400">
-              We constantly push the boundaries of what's possible, exploring new technologies and 
+              We constantly push the boundaries of what&rsquo;s possible, exploring new technologies and 
               approaches to solve real-world problems.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div className="border-l-4 border-foreground pl-6">
             <h3 className="text-2xl font-bold mb-3">Quality</h3>
             <p className="text-gray-600 dark:text-gray-400">
-              We're committed to delivering products that meet the highest standards of performance, 
+              We&rsquo;re committed to delivering products that meet the highest standards of performance, 
               reliability, and design.
             </p>
           </div>
@@ -85,8 +85,8 @@ export default function AboutPage() {
             <div>
               <h3 className="text-2xl font-bold mb-4">Tempis Studio</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Tempis Studio was born from the need for a professional creative workspace that doesn't 
-                compromise on power or usability. It's the result of years of research and collaboration 
+                Tempis Studio was born from the need for a professional creative workspace that doesn&rsquo;t 
+                compromise on power or usability. It&rsquo;s the result of years of research and collaboration 
                 with creative professionals worldwide.
               </p>
               <a
@@ -99,7 +99,7 @@ export default function AboutPage() {
             <div>
               <h3 className="text-2xl font-bold mb-4">Tempis Play</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Tempis Play represents our vision for accessible, engaging entertainment. We've designed 
+                Tempis Play represents our vision for accessible, engaging entertainment. We&rsquo;ve designed 
                 it to be intuitive enough for anyone to enjoy, yet deep enough to provide lasting value 
                 to our users.
               </p>
@@ -121,7 +121,7 @@ export default function AboutPage() {
             Want to Learn More?
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-            We'd love to hear from you. Reach out to learn more about Tempis Labs, Tempis Studio, 
+            We&rsquo;d love to hear from you. Reach out to learn more about Tempis Labs, Tempis Studio, 
             or Tempis Play.
           </p>
           <button className="rounded-lg bg-foreground text-background px-8 py-4 font-semibold text-lg hover:opacity-90 transition-opacity">

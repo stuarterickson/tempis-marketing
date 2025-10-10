@@ -31,13 +31,13 @@ export default function PlayPage() {
             <div className="bg-white dark:bg-black p-6 rounded-lg">
               <h3 className="text-xl font-bold mb-3">Intuitive Design</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Tempis Play features an interface that's easy to learn and enjoyable to use for all skill levels.
+                Tempis Play features an interface that&rsquo;s easy to learn and enjoyable to use for all skill levels.
               </p>
             </div>
             <div className="bg-white dark:bg-black p-6 rounded-lg">
               <h3 className="text-xl font-bold mb-3">Engaging Experiences</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Discover countless hours of entertainment with Tempis Play's diverse content library.
+                Discover countless hours of entertainment with Tempis Play&rsquo;s diverse content library.
               </p>
             </div>
             <div className="bg-white dark:bg-black p-6 rounded-lg">
