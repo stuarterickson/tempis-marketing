@@ -1,22 +1,22 @@
 import Link from 'next/link';
-import { GroupCardPhone, ScoreEntryPhone, SettlePhone } from './components/PhoneScreens';
+import { CardVignette, KeysVignette, SettleVignette } from './components/Vignettes';
 import { SIDE_GAMES, SITE } from './site';
 
 const FEATURES = [
   {
     title: 'Score in a couple of taps.',
     body: 'Big number keys, built for a moving cart and a gloved hand. Par is already suggested for every golfer. If the whole group made par, one tap saves the hole.',
-    phone: <ScoreEntryPhone />,
+    phone: <KeysVignette />,
   },
   {
     title: 'One card for the whole group.',
     body: 'Each golfer scores on his own phone, and everyone sees the same card, hole by hole. If two entries disagree, Play shows you before anyone signs.',
-    phone: <GroupCardPhone />,
+    phone: <CardVignette />,
   },
   {
     title: 'The bets settle themselves.',
     body: 'Pick the games on the first tee. When the last putt drops, Play shows who won what and who pays whom, down to the dollar. No more napkin math in the grill room.',
-    phone: <SettlePhone />,
+    phone: <SettleVignette />,
   },
 ];
 
@@ -83,7 +83,7 @@ export default function Home() {
                   <h3 className="mt-2 text-[1.75rem] font-bold leading-tight">{f.title}</h3>
                   <p className="mt-3 max-w-md text-[1.1875rem] leading-relaxed text-ink-soft">{f.body}</p>
                 </div>
-                <div className={`flex justify-center ${i % 2 === 1 ? 'md:order-1' : ''}`}>{f.phone}</div>
+                <div className={`w-full ${i % 2 === 1 ? 'md:order-1' : ''}`}>{f.phone}</div>
               </div>
             ))}
           </div>
