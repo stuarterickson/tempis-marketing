@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Tempis brand tokens — every value is a step of the Tempis Play theme ramps
+ * (packages/theme/src/ramps.ts in the app repo), so the site, the app and
+ * every printed piece share one palette.
+ */
+@theme {
+  --color-oat: #F5F1EA;        /* warm 100 — the page */
+  --color-ivory: #FCFAF7;      /* warm 50 — cards */
+  --color-well: #EEE6DA;       /* warm 200 — quiet well / inset */
+  --color-stone: #D8CDBD;      /* warm 300 — lines */
+  --color-edge: #7D7A75;       /* warm 500 — raised-control edge */
+  --color-bar: #AAA7A2;        /* warm 400 — raised-control bar */
+  --color-ink: #171615;        /* warm 950 — text */
+  --color-ink-soft: #4F4D49;   /* warm 700 — secondary text */
+  --color-fairway: #237849;    /* green 600 — actions */
+  --color-fairway-dark: #21643E; /* green 700 */
+  --color-fairway-deep: #174B2E; /* green 800 */
+  --color-fairway-tint: #EBFAEF; /* green 50 */
+  --color-fairway-soft: #D7EFDE; /* green 100 */
+  --color-flag: #65B683;       /* green 400 — selected / on dark */
+  --color-gold: #C49B38;       /* gold 400 — achievement, the "Play" in the wordmark */
+  --color-gold-text: #795B02;  /* gold 600 — achievement text on light */
+  --color-gold-tint: #FCF4E4;  /* gold 50 */
+  --color-graphite: #1A201F;   /* graphite 900 — dark band */
+  --color-graphite-deep: #0F1212; /* graphite 950 */
+  --color-graphite-raised: #232A29; /* graphite 800 */
+  --color-graphite-line: #35413F; /* graphite 600 */
+  --color-on-dark: #F5F1EA;    /* warm 100 on graphite */
+  --color-on-dark-soft: #AAA7A2; /* warm 400 on graphite */
+  --color-error: #B3261E;
+
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-oat);
+  color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 1.125rem; /* 18px: our golfers read this on a phone in the sun */
+  line-height: 1.6;
+  font-feature-settings: "tnum" 0;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Buttons: the app's raised controls ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 180ms cubic-bezier(.22,.61,.36,1), box-shadow 180ms cubic-bezier(.22,.61,.36,1), background 180ms;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:focus-visible { outline: 3px solid var(--color-flag); outline-offset: 3px; }
+.btn:active { transform: translateY(3px); box-shadow: none; }
+
+.btn-primary {
+  color: var(--color-ivory);
+  background: linear-gradient(var(--color-fairway), var(--color-fairway-dark));
+  border-color: var(--color-fairway-deep);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18), 0 3px 0 var(--color-fairway-deep);
+}
+.btn-primary:active { background: var(--color-fairway-dark); }
+
+.btn-secondary {
+  color: var(--color-ink);
+  background: linear-gradient(var(--color-ivory), var(--color-well));
+  border-color: var(--color-edge);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.7), 0 3px 0 var(--color-bar);
+}
+.btn-secondary:active { background: var(--color-well); }
+
+.btn-on-dark {
+  color: var(--color-ink);
+  background: linear-gradient(var(--color-oat), var(--color-stone));
+  border-color: var(--color-ivory);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.7), 0 3px 0 var(--color-edge);
+}
+
+.btn-sm { min-height: 2.75rem; padding: 0 1rem; font-size: 1rem; }
+
+.btn[disabled] {
+  cursor: default;
+  color: var(--color-ink-soft);
+  background: var(--color-well);
+  border-color: var(--color-stone);
+  box-shadow: none;
+  transform: none;
+}
+
+/* ---------- Text links ---------- */
+.link {
+  color: var(--color-fairway);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.link:hover { text-decoration-thickness: 2px; }
+
+/* ---------- Form fields ---------- */
+.field {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-edge);
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-size: 1.125rem;
+}
+.field:focus { outline: 3px solid var(--color-flag); outline-offset: 1px; border-color: var(--color-fairway); }
+
+/* Choice cards (one answer from a short list) */
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice span {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 3.25rem; padding: 0 1rem; border-radius: 10px;
+  border: 1px solid var(--color-edge); background: var(--color-ivory);
+  font-weight: 600; cursor: pointer; text-align: center; line-height: 1.25;
+}
+.choice input:checked + span {
+  background: var(--color-fairway-tint);
+  border: 2px solid var(--color-fairway);
+  color: var(--color-ink);
+}
+.choice input:focus-visible + span { outline: 3px solid var(--color-flag); outline-offset: 2px; }
