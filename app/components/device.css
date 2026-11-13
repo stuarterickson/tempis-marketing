@@ -166,9 +166,9 @@
 /* the round's open-invite card arrives once it's sent; seats fill with a small pop */
 .iv-out { display: none; }
 .iv-out.show { display: block; animation: iv-pop 480ms cubic-bezier(.3,1.18,.45,1); }
-.iv-seat { animation: iv-seat 900ms ease; }
+.iv-seat { animation: iv-seat 1400ms ease; border-radius: 8px; }
 @keyframes iv-pop { from { opacity: 0; transform: translateY(-6px) scale(.97); } to { opacity: 1; transform: none; } }
-@keyframes iv-seat { 0% { background: #D7EFDE; } 100% { background: transparent; } }
+@keyframes iv-seat { 0% { background: #B7E0C4; box-shadow: 0 0 0 3px #65B683; transform: scale(1.04); } 60% { background: #D7EFDE; box-shadow: 0 0 0 0 rgba(101,182,131,0); transform: none; } 100% { background: transparent; } }
 /* the Invite a group sheet rises from the bottom, as in the app */
 .iv-scrim { position: absolute; inset: 0; background: rgba(23,22,21,0.32); opacity: 0; transition: opacity 300ms ease; pointer-events: none; }
 .iv-scrim.show { opacity: 1; }
@@ -179,7 +179,14 @@
 .iv-env { position: absolute; left: 0; top: 0; width: 30px; height: 21px; margin: -10px 0 0 -15px; border-radius: 4px; background: #FCFAF7; border: 1.5px solid #237849; box-shadow: 0 10px 18px -8px rgba(16,48,29,.55); opacity: 0; }
 .iv-env::after { content: ''; position: absolute; left: 2px; right: 2px; top: 1px; height: 11px; border-bottom: 1.5px solid #237849; border-left: 1.5px solid transparent; border-right: 1.5px solid transparent; transform: skewY(0); clip-path: polygon(0 0, 100% 0, 50% 100%); background: #D7EFDE; }
 .iv-env.out { animation: iv-fly 1300ms cubic-bezier(.45,0,.25,1) both; }
-.iv-env.back { background: #237849; animation: iv-fly 900ms cubic-bezier(.45,0,.25,1) both; }
+.iv-env.back { background: #237849; width: 40px; height: 28px; margin: -14px 0 0 -20px; animation: iv-fly 1050ms cubic-bezier(.45,0,.25,1) both; box-shadow: 0 14px 24px -8px rgba(16,48,29,.6), 0 0 0 6px rgba(101,182,131,.25); }
+.iv-env.back::after { height: 15px; }
+/* Jim's phone opens out of his circle in the group */
+.iv-jim { position: absolute; z-index: 20; opacity: 0; transform: scale(0.06); transition: opacity 380ms ease, transform 620ms cubic-bezier(.3,1.18,.45,1); pointer-events: none; }
+.iv-jim.open { opacity: 1; transform: none; }
+.iv-jim:not(.open) { transition: opacity 420ms ease 120ms, transform 520ms cubic-bezier(.45,0,.25,1); }
+.iv-cap { text-align: center; font-size: 14px; color: #4C5857; margin-top: 4px; }
+.crowd i.hot { background: #D7EFDE; border-color: #237849; box-shadow: 0 0 0 4px rgba(101,182,131,0.45); transform: scale(1.15); }
 .iv-env.back::after { background: #65B683; border-bottom-color: #FCFAF7; }
 @keyframes iv-fly {
   0% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(.5); }
@@ -193,13 +200,16 @@
 /* Trust pledges */
 .pledge-ico { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--color-fairway-tint); color: var(--color-fairway); }
 
-/* Stats and goals: the phone face-on, the round's tiles lifted out in front */
-.goals-scene { position: relative; perspective: 1800px; display: flex; justify-content: center; padding: 10px 0 20px; }
+/* Stats and goals: the phone face-on, the app's charts and the round's tiles lifted out around it */
+.goals-scene { position: relative; perspective: 1800px; display: flex; justify-content: center; padding: 10px 0 30px; min-height: 700px; }
 .goals-scene .dv-flat .dv-stage { transform: rotateX(8deg); }
+.goals-charts { display: contents; }
 .goals-float { position: absolute; z-index: 40; }
-.goals-float-a { left: calc(50% - 330px); top: 120px; transform: rotate(-4deg); }
-.goals-float-b { right: calc(50% - 320px); top: 300px; transform: rotate(3deg); }
-.goals-float-c { left: calc(50% - 300px); bottom: 70px; }
+.goals-float-a { right: calc(50% - 330px); top: 70px; transform: rotate(3deg); }
+.goals-float-c { right: calc(50% - 360px); bottom: 70px; }
+.gc-pos-trend { left: calc(50% - 470px); top: 40px; transform: rotate(-2deg); }
+.gc-pos-impact { left: calc(50% - 450px); top: 360px; transform: rotate(1.5deg); }
+.gc-pos-putts { right: calc(50% - 480px); top: 260px; transform: rotate(-1.5deg); }
 .goal-tile { width: 170px; background: #FCFAF7; border: 1.5px solid #D8CDBD; border-radius: 16px; padding: 12px 14px; font-family: var(--font-sans); color: #171615; box-shadow: 0 34px 50px -26px rgba(16,48,29,0.5), 0 2px 6px rgba(16,48,29,0.08); }
 .goal-tile.met { border-color: #C49B38; }
 .gt-name { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; }
@@ -209,10 +219,62 @@
 .gt-row span { font-size: 14px; font-weight: 600; color: #66635E; }
 .goal-tile.met .gt-row span { color: #795B02; font-weight: 700; }
 .gt-target { font-size: 12px; color: #66635E; }
+
+/* the chart cards: drawn as the app draws them (light theme) */
+.gc-card { position: relative; background: #FCFAF7; border: 1px solid #D8CDBD; border-radius: 16px; padding: 12px 14px; font-family: var(--font-sans); color: #171615; font-size: 12px; line-height: 1.3; font-variant-numeric: tabular-nums; box-shadow: 0 34px 50px -26px rgba(16,48,29,0.5), 0 2px 6px rgba(16,48,29,0.08); }
+.gc-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.gc-h b { font-size: 15px; font-weight: 700; }
+.gc-h span { color: #66635E; font-size: 12px; }
+.gc-trend svg { display: block; }
+.gc-goal { position: absolute; left: 44px; top: 52px; font-size: 10.5px; font-weight: 600; color: #171615; background: #FCFAF7; border: 1px dashed #7D7A75; border-radius: 999px; padding: 1px 7px; }
+.gc-legend { display: flex; gap: 14px; margin-top: 6px; color: #66635E; font-size: 11.5px; }
+.gc-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.gc-legend i { display: inline-block; width: 16px; height: 3.5px; border-radius: 3px; background: #237849; }
+.gc-legend i.thin { height: 1.5px; background: #8DCBA2; }
+.gc-legend b { color: #171615; font-weight: 700; }
+.gc-putts { width: 250px; }
+.gc-figs { display: flex; gap: 22px; margin: -2px 0 10px; }
+.gc-figs div { display: flex; flex-direction: column; }
+.gc-figs b { font-size: 22px; font-weight: 800; line-height: 1.1; }
+.gc-figs span { color: #66635E; font-size: 11px; }
+.gc-prow { display: grid; grid-template-columns: 62px 1fr 34px; align-items: center; gap: 8px; margin-top: 6px; }
+.gc-plab { font-size: 12px; }
+.gc-ptrack { height: 16px; background: #F5F1EA; border-radius: 5px; overflow: hidden; }
+.gc-ptrack i { display: block; height: 100%; border-radius: 5px; }
+.gc-pct { text-align: right; font-weight: 600; }
+.gc-impact { width: 280px; }
+.gc-irow { display: flex; align-items: center; height: 26px; }
+.gc-ilab { width: 60px; font-size: 12px; }
+.gc-iunder { display: flex; justify-content: flex-end; }
+.gc-iline { position: relative; width: 2px; align-self: stretch; background: #AAA7A2; }
+.gc-iline em { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-style: normal; font-size: 10.5px; font-weight: 700; background: #8DCBA2; color: #171615; border-radius: 999px; padding: 1px 8px; }
+.gc-iover { display: flex; }
+.gc-impact .gc-grow { display: flex; align-items: center; height: 20px; font-style: normal; font-size: 11.5px; font-weight: 700; padding: 0 6px; border-radius: 0 5px 5px 0; white-space: nowrap; overflow: hidden; }
+.gc-impact .gc-left { justify-content: flex-start; border-radius: 5px 0 0 5px; }
+
+/* the reveal: the cards settle in turn, the line draws, the bars grow */
+.gs-armed .goals-float, .gs-on .goals-float { transition: opacity 600ms ease, translate 700ms cubic-bezier(.22,.61,.36,1); }
+.gs-armed .goals-float { opacity: 0; translate: 0 18px; }
+.gs-on .gf-2 { transition-delay: 150ms; } .gs-on .gf-3 { transition-delay: 450ms; } .gs-on .gf-4 { transition-delay: 750ms; }
+.gs-on .gf-1 { transition-delay: 1150ms; } .gs-on .gf-6 { transition-delay: 1450ms; }
+.gc-draw { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1400ms cubic-bezier(.45,0,.25,1) 500ms; }
+.gc-draw-late { transition-delay: 900ms; }
+.gs-armed .gc-draw { stroke-dashoffset: 1; }
+.gc-dot { transition: opacity 300ms ease; }
+.gc-end { transition-delay: 2100ms; }
+.gs-armed .gc-dot { opacity: 0; }
+.gc-grow { transform-origin: left center; transition: transform 800ms cubic-bezier(.22,.61,.36,1); }
+.gc-left { transform-origin: right center; }
+.gs-armed .gc-grow { transform: scaleX(0); }
+.gs-on .gc-draw { stroke-dashoffset: 0; } .gs-on .gc-dot { opacity: 1; } .gs-on .gc-grow { transform: none; }
+.gs-on .gf-3 .gc-grow { transition-delay: 800ms; } .gs-on .gf-4 .gc-grow { transition-delay: 1100ms; }
+
 @media (max-width: 760px) {
-  .goals-float-a { left: auto; right: 4px; top: 6px; }
-  .goals-float-b { right: 6px; top: 330px; }
-  .goals-float-c { left: 12px; bottom: 40px; }
+  .goals-scene { flex-direction: column; align-items: center; min-height: 0; }
+  .goals-float-a { right: 4px; top: 6px; }
+  .goals-float-c { left: 12px; right: auto; bottom: auto; top: 540px; }
+  .goals-charts { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 40px; width: 100%; }
+  .goals-charts .goals-float { position: static; transform: none; }
   .goal-tile { width: 142px; padding: 10px 12px; }
   .gt-row b { font-size: 28px; }
 }

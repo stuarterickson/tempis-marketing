@@ -100,17 +100,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Statistics and goals */}
+      {/* Statistics and goals: the phone and the app's own charts around it */}
       <section id="goals" aria-labelledby="goals-heading" className="scroll-mt-24 overflow-hidden border-t border-stone">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-28">
-          <div className="md:col-span-5">
-            <h2 id="goals-heading" className="text-[2.25rem] leading-[1.08] md:text-[3rem]">Know where your game is headed.</h2>
-            <p className="mt-5 max-w-md text-[1.1875rem] leading-relaxed text-ink-soft">
-              Set a goal for the numbers you care about: score, putts, greens, fairways. After every round Backbeat shows which goals you met and how close you came on the rest. Your last rounds sit beside each goal, so you can see the trend at a glance.
-            </p>
-            <p className="mt-4 max-w-md text-ink-soft">Putts, fairways and greens are one extra tap per hole, and only if you want them.</p>
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+          <div className="grid gap-6 md:grid-cols-12">
+            <h2 id="goals-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Know where your game is headed.</h2>
+            <div className="max-w-xl md:col-span-6 md:col-start-7">
+              <p className="text-[1.1875rem] leading-relaxed text-ink-soft">
+                Set a goal for the numbers you care about: score, putts, greens, fairways. After every round Backbeat shows which goals you met, how your scoring is trending, and where the strokes went. No spreadsheets, and nothing to work out.
+              </p>
+              <p className="mt-4 text-ink-soft">Putts, fairways and greens are one extra tap per hole, and only if you want them.</p>
+            </div>
           </div>
-          <div className="md:col-span-7"><GoalsScene /></div>
+          <div className="mt-10 md:mt-14"><GoalsScene /></div>
         </div>
       </section>
 

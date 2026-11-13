@@ -290,9 +290,9 @@ export function HoleScreen({ rows, saveRef, keyRef, pressedSave }: {
 
 /* ---------- The open invite: the organizer's round ---------- */
 
-export function OpenInviteScreen({ filled, out, inviteRef, hot }: { filled: string[]; out?: boolean; inviteRef?: React.Ref<HTMLSpanElement>; hot?: boolean }) {
+export function OpenInviteScreen({ filled, out, inviteRef, hot, seatRef }: { filled: string[]; out?: boolean; inviteRef?: React.Ref<HTMLSpanElement>; hot?: boolean; seatRef?: (i: number, el: HTMLDivElement | null) => void }) {
   const open = 2 - filled.length;
-  const seats = ['Stuart', 'Dave', ...filled, ...Array(open).fill(null)];
+  const seats = ['Dave', 'Tom', ...filled, ...Array(open).fill(null)];
   return (
     <div className="ap">
       <StatusBar />
@@ -314,7 +314,7 @@ export function OpenInviteScreen({ filled, out, inviteRef, hot }: { filled: stri
         <div className="ap-sec" style={{ padding: '6px 4px 6px' }}>Who’s playing</div>
         <div className="ap-card" style={{ padding: '4px 12px' }}>
           {seats.map((s, i) => (
-            <div key={i} className={i > 1 && s ? 'iv-seat' : ''} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
+            <div key={i} ref={seatRef ? (el) => seatRef(i, el) : undefined} className={i > 1 && s ? 'iv-seat' : ''} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
               <span style={{ fontWeight: 600, color: s ? '#171615' : '#66635E' }}>{s ?? 'Open spot'}</span>
               <span className="ap-sub" style={i > 1 && s ? { color: '#21643E', fontWeight: 600 } : undefined}>{s ? (i < 2 ? (i === 0 ? 'Organizer' : 'In') : 'Said yes first') : out ? 'Invite out' : ''}</span>
             </div>
@@ -369,6 +369,69 @@ export function InviteGroupSheet({ picked, rowRef, sendRef, rowHot, sendHot }: {
         ) : (
           <span className="ap-btn" style={{ background: '#EEE6DA', color: '#AAA7A2', borderColor: '#D8CDBD', boxShadow: 'none' }}>Invite</span>
         )}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Jim's phone: the invitation arrives on Home ---------- */
+
+/** Home, with the open invite as a To Do row (the app's own words: "Dave has 2 spots open" · Respond). */
+export function JimHomeScreen({ respondRef, hot }: { respondRef?: React.Ref<HTMLSpanElement>; hot?: boolean }) {
+  return (
+    <div className="ap">
+      <StatusBar />
+      <div className="ap-top"><div><div className="ap-title">Home</div><div className="ap-sub">Jim Barnes</div></div></div>
+      <div className="ap-sec">To Do</div>
+      <div className="ap-body">
+        <div className="ap-card iv-todo" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 14 }}>Dave has 2 spots open</div>
+            <div style={{ fontSize: 12, marginTop: 2 }}><b style={{ color: '#21643E' }}>Sat 8:10 AM</b> <span style={{ color: '#66635E' }}>· Wellshire</span></div>
+          </div>
+          <span ref={respondRef} className={`ap-btn ap-btn2 ${hot ? 'ap-pressed' : ''}`} style={{ height: 36, fontSize: 13.5, padding: '0 12px' }}>Respond</span>
+        </div>
+      </div>
+      <div className="ap-sec">Upcoming</div>
+      <div className="ap-body">
+        <div className="ap-card">
+          <div style={{ fontWeight: 700, fontSize: 14 }}>Men’s Club Stableford</div>
+          <div style={{ fontSize: 12, color: '#66635E', marginTop: 2 }}>Sat, Nov 22 · Wellshire</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Dave's round, as Jim sees it: the open invite with I'm in / Can't make it. */
+export function JimInviteScreen({ inRef, hot, claimed }: { inRef?: React.Ref<HTMLSpanElement>; hot?: boolean; claimed?: boolean }) {
+  const seats = ['Dave', 'Tom', claimed ? 'Jim B.' : null, null];
+  return (
+    <div className="ap">
+      <StatusBar />
+      <div className="ap-top">
+        <span className="ap-back">‹</span>
+        <div><div className="ap-title">Wellshire</div><div className="ap-sub">Saturday, 8:10 AM tee time</div></div>
+      </div>
+      <div className="ap-body" style={{ marginTop: 6 }}>
+        <div className="ap-card">
+          <div className="ap-game" style={{ fontSize: 14 }}><span className="ap-ico">✉</span>Dave’s open invite</div>
+          <div style={{ marginTop: 6, fontSize: 13, fontWeight: 600, color: claimed ? '#21643E' : '#171615' }}>
+            {claimed ? 'You’re in Dave’s round.' : '2 spots open — first to say yes gets them.'}
+          </div>
+          {!claimed && (
+            <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+              <span ref={inRef} className={`ap-btn ${hot ? 'ap-pressed' : ''}`} style={{ height: 38, fontSize: 14, padding: '0 16px' }}>I’m in</span>
+              <span className="ap-btn ap-btn2" style={{ height: 38, fontSize: 14, padding: '0 12px', whiteSpace: 'nowrap' }}>Can’t make it</span>
+            </div>
+          )}
+        </div>
+        <div className="ap-sec" style={{ padding: '6px 4px' }}>Who’s playing</div>
+        <div className="ap-card" style={{ padding: '2px 12px' }}>
+          {seats.map((n, i) => (
+            <div key={i} className={i === 2 && n ? 'iv-seat' : ''} style={{ padding: '8px 0', borderTop: i ? '1px solid #EEE6DA' : 'none', fontWeight: 600, color: n ? '#171615' : '#66635E' }}>{n ?? 'Open spot'}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
