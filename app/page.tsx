@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import ScorecardStrip from './components/ScorecardStrip';
-import { CardVignette, KeysVignette, SettleVignette } from './components/Vignettes';
+import Device from './components/Device';
+import GamesDemo from './components/GamesDemo';
+import { GroupCardScreen, ScoreEntryScreen } from './components/AppScreens';
+import './components/device.css';
 import { Wordmark } from './components/Wordmark';
 import { SIDE_GAMES, SITE } from './site';
 
@@ -8,17 +10,22 @@ const FEATURES = [
   {
     title: 'Score in a couple of taps.',
     body: 'Big number keys, built for a moving cart and a gloved hand. Par is already suggested for every golfer. If the whole group made par, one tap saves the hole.',
-    picture: <KeysVignette />,
+    picture: (
+      <Device tilt="right" label="Tempis Play's score entry: a row of big number keys for each golfer, with par suggested"
+        float={<div className="fl-card"><small>Hole 7</small>Two taps. <b>Saved.</b></div>}>
+        <ScoreEntryScreen />
+      </Device>
+    ),
   },
   {
     title: 'One card for the whole group.',
     body: 'Each golfer scores on his own phone, and everyone sees the same card, hole by hole. If two entries disagree, Play shows you before anyone signs.',
-    picture: <CardVignette />,
-  },
-  {
-    title: 'The bets settle themselves.',
-    body: 'Pick the games on the first tee. When the last putt drops, Play shows who won what and who pays whom, down to the dollar. No more napkin math in the grill room.',
-    picture: <SettleVignette />,
+    picture: (
+      <Device tilt="left" label="Tempis Play's group card: four golfers' scores on one card, ready to sign"
+        float={<div className="fl-card"><small>Group card</small>All four cards <b>match</b>.</div>}>
+        <GroupCardScreen />
+      </Device>
+    ),
   },
 ];
 
@@ -57,34 +64,29 @@ const FAQ = [
 export default function Home() {
   return (
     <>
-      {/* Opening: the headline, then the card filling in */}
-      <section>
-        <div className="mx-auto max-w-6xl px-5 pt-14 md:px-8 md:pt-28">
-          <h1 className="text-[3.25rem] leading-[0.98] md:text-[6rem] md:leading-[0.94]">
-            The scorecard,<br className="hidden md:inline" /> handled.
-          </h1>
-          <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end">
-            <p className="text-[1.25rem] leading-relaxed text-ink-soft md:col-span-6">
+      {/* Opening: the headline beside the games demo */}
+      <section className="overflow-hidden">
+        <div className="mx-auto grid max-w-6xl items-center gap-6 px-5 pt-12 md:grid-cols-12 md:px-8 md:pt-20">
+          <div className="md:col-span-6">
+            <h1 className="text-[3.25rem] leading-[1.0] md:text-[5rem] md:leading-[0.98]">{SITE.tagline}</h1>
+            <p className="mt-7 max-w-lg text-[1.25rem] leading-relaxed text-ink-soft">
               Tempis Play keeps score for you and your group, settles the side games, and remembers every round. Free on iPhone and Android.
             </p>
-            <div className="flex flex-wrap gap-4 md:col-span-5 md:col-start-8 md:justify-end">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/beta" className="btn btn-primary">Join the beta</Link>
               <Link href="/#how-it-works" className="btn btn-secondary">See how it works</Link>
             </div>
           </div>
-          <div className="mt-14 md:mt-20">
-            <ScorecardStrip />
-            <p className="mt-3 text-base text-ink-soft">
-              Tom’s front nine, one hole at a time. The card adds itself up.
-            </p>
+          <div className="md:col-span-6 md:pl-6">
+            <GamesDemo />
           </div>
         </div>
       </section>
 
       {/* What it does */}
       <section aria-labelledby="what-it-does">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-32">
-          <h2 id="what-it-does" className="max-w-2xl text-[2.25rem] leading-[1.1] md:text-[3rem]">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+          <h2 id="what-it-does" className="max-w-2xl text-[2.25rem] leading-[1.08] md:text-[3.25rem]">
             Built for the cart, the group and the grill room.
           </h2>
           <div className="mt-14 space-y-20 md:mt-20 md:space-y-28">

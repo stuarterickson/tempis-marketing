@@ -14,6 +14,6 @@ export function Wordmark({
   height?: number;
 }) {
   const file = `/brand/tempis-${product.toLowerCase()}-lockup${onDark ? '-reversed' : ''}.svg`;
-  const width = Math.round(height * (product === 'Play' ? 403 : 453) / 64);
+  const width = Math.round(height * (product === 'Play' ? 318 : 359) / 64);
   return <img src={file} alt={`Tempis ${product}`} width={width} height={height} className="block" />;
 }

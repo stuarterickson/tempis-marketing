@@ -1,0 +1,113 @@
+/* ---------- The phone ---------- */
+.dv { margin: 0; display: flex; justify-content: center; perspective: 1800px; padding: 24px 0 56px; }
+.dv-stage { position: relative; transform-style: preserve-3d; transition: transform 900ms cubic-bezier(.22,.61,.36,1); }
+.dv-right .dv-stage { transform: rotateY(-17deg) rotateX(7deg) rotateZ(1.5deg); }
+.dv-left .dv-stage { transform: rotateY(17deg) rotateX(7deg) rotateZ(-1.5deg); }
+.dv-hero .dv-stage { transform: rotateY(-22deg) rotateX(9deg) rotateZ(2.5deg); }
+@media (hover: hover) { .dv:hover .dv-stage { transform: rotateY(-6deg) rotateX(3deg) rotateZ(0.5deg); } .dv-left:hover .dv-stage { transform: rotateY(6deg) rotateX(3deg) rotateZ(-0.5deg); } }
+
+.dv-floor { position: absolute; left: 8%; right: 8%; bottom: -46px; height: 60px; border-radius: 50%; background: radial-gradient(closest-side, rgba(16,48,29,0.34), rgba(16,48,29,0)); filter: blur(10px); transform: translateZ(-60px); }
+
+.dv-body {
+  position: relative; width: 300px; height: 620px; border-radius: 54px; padding: 11px;
+  background: linear-gradient(150deg, #4a4e52 0%, #1d1f21 22%, #303336 52%, #121314 78%, #3a3d40 100%);
+  box-shadow:
+    inset 0 0 0 1.5px #6c7175,
+    inset 0 0 0 4px #0c0d0e,
+    0 60px 90px -40px rgba(16, 48, 29, 0.55),
+    0 30px 50px -30px rgba(0, 0, 0, 0.45);
+}
+.dv-btn { position: absolute; width: 4px; border-radius: 3px; background: linear-gradient(90deg, #2a2c2e, #55595d); }
+.dv-btn-a { left: -3px; top: 112px; height: 30px; }
+.dv-btn-b { left: -3px; top: 160px; height: 58px; }
+.dv-btn-c { right: -3px; top: 176px; height: 86px; background: linear-gradient(270deg, #2a2c2e, #55595d); }
+
+.dv-screen { position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: #F5F1EA; }
+.dv-island { position: absolute; z-index: 20; top: 11px; left: 50%; width: 92px; height: 27px; margin-left: -46px; border-radius: 20px; background: #050505; }
+.dv-glare { position: absolute; inset: 0; z-index: 30; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 26%, rgba(255,255,255,0) 40%); }
+
+.dv-float { position: absolute; z-index: 40; transform: translateZ(70px); }
+.dv-right .dv-float, .dv-hero .dv-float { left: -88px; bottom: 96px; }
+.dv-left .dv-float { right: -88px; bottom: 120px; }
+
+@media (max-width: 520px) {
+  .dv { padding: 8px 0 48px; }
+  .dv-stage { zoom: 0.92; }
+  .dv-right .dv-float, .dv-hero .dv-float { left: -24px; }
+  .dv-left .dv-float { right: -24px; }
+}
+@media (prefers-reduced-motion: reduce) { .dv-stage { transition: none; } }
+
+/* ---------- Inside the phone: the Play app's own look (light theme) ---------- */
+.ap { position: absolute; inset: 0; font-family: var(--font-sans); color: #171615; font-size: 13px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.ap-status { height: 50px; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 26px 6px 30px; font-size: 13px; font-weight: 600; }
+.ap-status i { font-style: normal; letter-spacing: 1px; font-size: 11px; }
+.ap-top { display: flex; align-items: center; gap: 8px; padding: 6px 16px 8px; }
+.ap-back { width: 28px; height: 28px; border-radius: 9px; display: flex; align-items: center; justify-content: center; color: #237849; font-size: 20px; font-weight: 600; }
+.ap-title { font-size: 21px; line-height: 26px; font-weight: 800; letter-spacing: -0.01em; }
+.ap-sub { font-size: 12px; color: #66635E; }
+.ap-sec { font-size: 15px; font-weight: 700; padding: 10px 16px 6px; }
+.ap-body { padding: 0 12px; }
+.ap-card { background: #FCFAF7; border: 1px solid #D8CDBD; border-radius: 14px; padding: 12px; margin-bottom: 10px; }
+.ap-card-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ap-game { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+.ap-ico { width: 24px; height: 24px; border-radius: 7px; background: #D7EFDE; color: #21643E; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+.ap-chev { color: #237849; font-size: 18px; font-weight: 700; }
+.ap-meta { font-size: 12px; color: #66635E; margin-top: 2px; }
+.ap-tbl { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.ap-tbl th { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #66635E; font-weight: 600; text-align: right; padding: 0 0 4px; }
+.ap-tbl th:first-child, .ap-tbl td:first-child { text-align: left; }
+.ap-tbl td { padding: 4px 0; text-align: right; border-top: 1px solid #EEE6DA; }
+.ap-tbl td:first-child { font-weight: 600; }
+.ap-tbl tr.me td { background: #E3EEFB; }
+.ap-won { color: #795B02; font-weight: 700; }
+.ap-lost { color: #B3261E; font-weight: 600; }
+.ap-btn { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 18px; border-radius: 12px; font-weight: 600; font-size: 15px; color: #FCFAF7; background: linear-gradient(#237849, #21643E); border: 1px solid #174B2E; box-shadow: 0 3px 0 #174B2E; }
+.ap-btn2 { color: #171615; background: linear-gradient(#FCFAF7, #EEE6DA); border-color: #7D7A75; box-shadow: 0 3px 0 #AAA7A2; }
+.ap-foot { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px 26px; display: flex; justify-content: flex-end; background: linear-gradient(rgba(245,241,234,0), #F5F1EA 30%); }
+.ap-pressed { transform: translateY(3px); box-shadow: none !important; }
+
+/* hole tiles */
+.ap-tile { display: flex; align-items: stretch; border-radius: 12px; overflow: hidden; border: 1px solid #D8CDBD; background: #FCFAF7; margin-bottom: 7px; }
+.ap-tile .hb { width: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #EEE6DA; font-weight: 800; font-size: 16px; }
+.ap-tile .hb small { font-size: 8px; font-weight: 600; letter-spacing: 0.08em; color: #66635E; }
+.ap-tile .tx { flex: 1; padding: 7px 10px; }
+.ap-tile .tx b { display: block; font-size: 14px; }
+.ap-tile .tx span { font-size: 11.5px; color: #66635E; }
+.ap-tile .mn { padding: 0 12px; display: flex; align-items: center; font-weight: 700; color: #795B02; font-size: 15px; }
+.ap-tile.won { background: #EBFAEF; border-color: #8DCBA2; }
+.ap-tile.won .hb { background: #B7E0C4; color: #10301D; }
+.ap-tile.won .hb small { color: #21643E; }
+
+.ap-toggle { display: inline-flex; border: 1px solid #7D7A75; border-radius: 10px; overflow: hidden; font-size: 12px; font-weight: 600; }
+.ap-toggle span { padding: 6px 10px; background: #FCFAF7; }
+.ap-toggle span.on { background: #65B683; color: #071E10; }
+
+.ap-pay { font-size: 19px; line-height: 1.45; margin: 4px 0; }
+.ap-pay b { font-weight: 700; }
+
+/* score keys */
+.ap-keys { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
+.ap-key { height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 700; color: #171615; background: linear-gradient(#FCFAF7, #EEE6DA); border: 1px solid #7D7A75; box-shadow: 0 2.5px 0 #AAA7A2; }
+.ap-key.on { background: #65B683; border-color: #65B683; box-shadow: inset 0 2px 3px rgba(23,22,21,0.25); transform: translateY(2.5px); }
+.ap-key.sg { background: #EBFAEF; border: 1.5px dashed #237849; box-shadow: none; color: #237849; }
+
+/* the demo: screens slide, a finger taps */
+.gd { position: absolute; inset: 0; overflow: hidden; }
+.gd-scr { position: absolute; inset: 0; background: #F5F1EA; transition: transform 520ms cubic-bezier(.22,.61,.36,1), opacity 520ms cubic-bezier(.22,.61,.36,1); }
+.gd-scr.in { transform: none; opacity: 1; }
+.gd-scr.right { transform: translateX(100%); }
+.gd-scr.left { transform: translateX(-28%); opacity: 0.6; }
+.gd-scroll { transition: transform 1600ms cubic-bezier(.45,0,.25,1); }
+.gd-finger { position: absolute; z-index: 25; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: rgba(23,22,21,0.18); border: 2px solid rgba(255,255,255,0.85); box-shadow: 0 6px 16px rgba(0,0,0,0.25); opacity: 0; transform: scale(1.25); transition: opacity 260ms ease, transform 260ms ease, left 700ms cubic-bezier(.22,.61,.36,1), top 700ms cubic-bezier(.22,.61,.36,1); pointer-events: none; }
+.gd-finger.show { opacity: 1; transform: scale(1); }
+.gd-finger.press { transform: scale(0.82); background: rgba(23,22,21,0.3); }
+.gd-hl { transition: background 200ms ease, transform 200ms ease; }
+.gd-hl.hot { background: #EEE6DA; transform: scale(0.985); }
+@media (prefers-reduced-motion: reduce) { .gd-scr, .gd-finger, .gd-scroll { transition: none; } }
+
+/* floating depth card */
+.fl-card { background: #FFFFFF; color: #10301D; border-radius: 16px; padding: 12px 16px; font-size: 15px; line-height: 1.4; box-shadow: 0 30px 50px -24px rgba(16,48,29,0.45), 0 2px 6px rgba(16,48,29,0.08); border: 1px solid #D7EFDE; white-space: nowrap; transition: opacity 500ms ease, transform 500ms cubic-bezier(.22,.61,.36,1); }
+.fl-card small { display: block; font-size: 12px; color: #4C5857; }
+.fl-card b { font-weight: 700; }
+.fl-hide { opacity: 0; transform: translateY(10px); }

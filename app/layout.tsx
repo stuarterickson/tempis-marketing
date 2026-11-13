@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import '@fontsource-variable/inter';
-import '@fontsource-variable/besley';
-import '@fontsource-variable/besley/wght-italic.css';
+import '@fontsource-variable/inter/opsz.css';
+import '@fontsource-variable/inter/opsz-italic.css';
 import './globals.css';
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
