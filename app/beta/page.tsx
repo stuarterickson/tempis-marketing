@@ -22,8 +22,7 @@ export default function BetaPage() {
   return (
     <div className="mx-auto grid max-w-6xl gap-12 px-5 py-12 md:grid-cols-[0.9fr_1.1fr] md:py-20">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.11em] text-fairway">Beta</p>
-        <h1 className="mt-3 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight md:text-[3rem]">Help us finish Tempis Play.</h1>
+        <h1 className="text-[2.75rem] font-semibold leading-[1.08] tracking-tight md:text-[3rem]">Help us finish Tempis Play.</h1>
         <p className="mt-4 text-[1.1875rem] leading-relaxed text-ink-soft">
           We’re inviting a small group of golfers to use Play for their regular rounds before it goes public.
           You don’t need to be good with phones. If anything, we want to hear from you most.

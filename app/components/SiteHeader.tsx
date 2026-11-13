@@ -10,23 +10,23 @@ const NAV = [
 
 export default function SiteHeader() {
   return (
-    <header className="border-b border-stone bg-oat/95 backdrop-blur supports-[backdrop-filter]:bg-oat/85 sticky top-0 z-30">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+    <header className="sticky top-0 z-30 border-b border-stone bg-oat/95 backdrop-blur supports-[backdrop-filter]:bg-oat/90">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-8">
         <Link href="/" aria-label="Tempis Play home" className="shrink-0">
-          <Wordmark />
+          <span className="md:hidden"><Wordmark height={28} /></span><span className="hidden md:block"><Wordmark height={34} /></span>
         </Link>
-        <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
           {NAV.map((item) => (
-            <Link key={item.href} href={item.href} className="text-[1.0625rem] font-medium text-ink-soft hover:text-ink">
+            <Link key={item.href} href={item.href} className="text-[1.0625rem] text-ink-soft hover:text-ink">
               {item.label}
             </Link>
           ))}
         </nav>
-        <Link href="/beta" className="btn btn-primary btn-sm">Join the beta</Link>
+        <Link href="/beta" className="btn btn-primary btn-sm whitespace-nowrap">Join the beta</Link>
       </div>
-      <nav aria-label="Main" className="flex gap-5 overflow-x-auto border-t border-stone px-5 py-2.5 md:hidden">
+      <nav aria-label="Sections" className="flex gap-6 overflow-x-auto border-t border-stone px-5 py-2.5 md:hidden">
         {NAV.map((item) => (
-          <Link key={item.href} href={item.href} className="whitespace-nowrap text-base font-medium text-ink-soft">
+          <Link key={item.href} href={item.href} className="whitespace-nowrap text-base text-ink-soft">
             {item.label}
           </Link>
         ))}

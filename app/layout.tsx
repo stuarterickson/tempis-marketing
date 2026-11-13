@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import '@fontsource-variable/inter';
+import '@fontsource-variable/besley';
+import '@fontsource-variable/besley/wght-italic.css';
 import './globals.css';
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F5F1EA',
+  themeColor: '#FCFAF7',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -17,7 +17,7 @@ function Stage({ children, label, fade }: { children: React.ReactNode; label: st
     <figure
       role="img"
       aria-label={label}
-      className="relative mx-auto flex aspect-[5/4] w-full max-w-[460px] items-center justify-center overflow-hidden rounded-[28px] border border-stone bg-[radial-gradient(circle_at_30%_20%,var(--color-ivory),var(--color-well)_70%)]"
+      className="relative mx-auto flex aspect-[5/4] w-full max-w-[460px] items-center justify-center overflow-hidden rounded-[28px] border border-stone bg-well"
     >
       <div className={`w-full px-7 ${mask}`}>{children}</div>
     </figure>
@@ -119,7 +119,7 @@ export function SettleVignette() {
   return (
     <Stage label="Close-up of Tempis Play's settle-up: who pays whom, in plain sentences" fade="both">
       <div className="mx-auto max-w-[360px] rounded-[18px] border border-stone bg-ivory px-6 py-5 shadow-[0_18px_40px_-24px_rgb(23_22_21/0.35)]">
-        <div className="text-[13px] font-semibold uppercase tracking-[0.11em] text-ink-soft">Who pays whom</div>
+        <div className="text-[15px] font-semibold text-ink-soft">Who pays whom</div>
         <div className="mt-3 space-y-2.5 text-[22px] leading-snug">
           <div>Bill pays Tom <span className="font-bold tabular-nums">$7</span>.</div>
           <div>Mike pays Tom <span className="font-bold tabular-nums">$5</span>.</div>

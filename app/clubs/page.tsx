@@ -20,28 +20,29 @@ export default function ClubsPage() {
   return (
     <>
       <section className="bg-graphite text-on-dark">
-        <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-          <Wordmark product="Studio" onDark />
-          <h1 className="mt-6 max-w-3xl text-[2.5rem] font-extrabold leading-[1.08] tracking-tight md:text-[3.25rem]">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+          <Wordmark product="Studio" onDark height={34} />
+          <h1 className="mt-8 max-w-3xl text-[2.5rem] font-semibold leading-[1.08] tracking-tight md:text-[3.25rem]">
             Your board runs the season. Your members just play.
           </h1>
           <p className="mt-5 max-w-2xl text-[1.1875rem] leading-relaxed text-on-dark-soft">
             Tempis Studio is the back office for men’s and women’s golf clubs. It replaces the spreadsheets, the email chains and the clipboard at the first tee.
             Everything your board sets up shows up in Tempis Play, the app your members already use for their casual rounds.
           </p>
+          <div className="mt-8 h-px w-28 bg-gold" />
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-        <h2 className="text-[2rem] font-bold leading-tight tracking-tight">What Studio handles</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-12 md:px-8 md:py-24">
+        <h2 className="text-[2.25rem] leading-[1.1] md:col-span-4 md:text-[2.75rem]">What Studio handles</h2>
+        <dl className="grid border-t-2 border-ink sm:grid-cols-2 sm:gap-x-10 md:col-span-7 md:col-start-6">
           {JOBS.map((j) => (
-            <div key={j.title} className="rounded-[14px] border border-stone bg-ivory p-6">
-              <h3 className="text-[1.25rem] font-bold">{j.title}</h3>
-              <p className="mt-2 text-ink-soft">{j.body}</p>
+            <div key={j.title} className="border-b border-stone py-6">
+              <dt className="display text-[1.375rem]">{j.title}</dt>
+              <dd className="mt-1.5 text-ink-soft">{j.body}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       <section className="border-t border-stone bg-ivory">

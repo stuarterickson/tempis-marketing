@@ -25,7 +25,7 @@ const TOPICS = [
 export default function SupportPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-12 md:py-20">
-      <h1 className="text-[2.5rem] font-extrabold leading-[1.08] tracking-tight">Help</h1>
+      <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight">Help</h1>
       <p className="mt-4 text-[1.1875rem] text-ink-soft">
         Email <a className="link" href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>. A person answers, usually within a day.
       </p>

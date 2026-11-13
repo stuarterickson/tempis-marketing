@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function DeleteAccountPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-12 md:py-20">
-      <h1 className="text-[2.5rem] font-extrabold leading-[1.08] tracking-tight">Delete your Tempis Play account</h1>
+      <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight">Delete your Tempis Play account</h1>
 
       <h2 className="mt-10 text-[1.5rem] font-bold">In the app</h2>
       <ol className="mt-3 list-decimal space-y-2 pl-6">
