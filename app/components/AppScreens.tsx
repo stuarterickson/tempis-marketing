@@ -376,24 +376,39 @@ export function InviteGroupSheet({ picked, rowRef, sendRef, rowHot, sendHot }: {
 
 /* ---------- Jim's phone: the invitation arrives on Home ---------- */
 
-/** Home, with the open invite as a To Do row (the app's own words: "Dave has 2 spots open" · Respond). */
-export function JimHomeScreen({ respondRef, hot }: { respondRef?: React.Ref<HTMLSpanElement>; hot?: boolean }) {
+/**
+ * Jim's Home. Before he answers, the open invite is a To Do row (the app's own
+ * words: "Dave has 2 spots open" · Respond). Once he's in, it's gone from To Do
+ * and the round sits under Upcoming: the course, the tee time, who he's playing with.
+ */
+export function JimHomeScreen({ respondRef, hot, scheduled, withRick }: { respondRef?: React.Ref<HTMLSpanElement>; hot?: boolean; scheduled?: boolean; withRick?: boolean }) {
   return (
     <div className="ap">
       <StatusBar />
       <div className="ap-top"><div><div className="ap-title">Home</div><div className="ap-sub">Jim Barnes</div></div></div>
-      <div className="ap-sec">To Do</div>
-      <div className="ap-body">
-        <div className="ap-card iv-todo" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontWeight: 700, fontSize: 14 }}>Dave has 2 spots open</div>
-            <div style={{ fontSize: 12, marginTop: 2 }}><b style={{ color: '#21643E' }}>Sat 8:10 AM</b> <span style={{ color: '#66635E' }}>· Wellshire</span></div>
+      {!scheduled && (
+        <>
+          <div className="ap-sec">To Do</div>
+          <div className="ap-body">
+            <div className="ap-card" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 700, fontSize: 14 }}>Dave has 2 spots open</div>
+                <div style={{ fontSize: 12, marginTop: 2 }}><b style={{ color: '#21643E' }}>Sat 8:10 AM</b> <span style={{ color: '#66635E' }}>· Wellshire</span></div>
+              </div>
+              <span ref={respondRef} className={`ap-btn ap-btn2 ${hot ? 'ap-pressed' : ''}`} style={{ height: 36, fontSize: 13.5, padding: '0 12px' }}>Respond</span>
+            </div>
           </div>
-          <span ref={respondRef} className={`ap-btn ap-btn2 ${hot ? 'ap-pressed' : ''}`} style={{ height: 36, fontSize: 13.5, padding: '0 12px' }}>Respond</span>
-        </div>
-      </div>
+        </>
+      )}
       <div className="ap-sec">Upcoming</div>
       <div className="ap-body">
+        {scheduled && (
+          <div className="ap-card iv-new">
+            <div style={{ fontWeight: 700, fontSize: 14 }}>Wellshire</div>
+            <div style={{ fontSize: 12, marginTop: 2 }}><b style={{ color: '#21643E' }}>Sat 8:10 AM</b></div>
+            <div style={{ fontSize: 12, color: '#66635E', marginTop: 2 }}>W/ Dave, Tom{withRick ? ', Rick' : ''}</div>
+          </div>
+        )}
         <div className="ap-card">
           <div style={{ fontWeight: 700, fontSize: 14 }}>Men’s Club Stableford</div>
           <div style={{ fontSize: 12, color: '#66635E', marginTop: 2 }}>Sat, Nov 22 · Wellshire</div>

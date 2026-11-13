@@ -10,7 +10,7 @@ import { InviteGroupSheet, JimHomeScreen, JimInviteScreen, OpenInviteScreen } fr
  * and sends it; the invitations fly out to all fifty at once. Then Jim's phone
  * opens out of the crowd: the invitation is on his Home, he taps Respond, then
  * I'm in — and his yes flies across into Dave's open spot, which fills with
- * his name. Rick's yes flies into the second spot; Ken, a minute late, is told
+ * his name, while his own Home now shows the round under Upcoming. Rick's yes flies into the second spot; Ken, a minute late, is told
  * there are no open spots left. About 20 seconds a loop. Pauses off screen;
  * with reduced motion it shows the finished round and stays still.
  */
@@ -28,7 +28,7 @@ type Step = {
   finger?: Finger; press?: boolean;
   sheet?: boolean; picked?: boolean; out?: boolean;
   fly?: boolean; lit?: boolean;
-  jim?: 'home' | 'invite' | 'claimed'; jimFinger?: JimFinger; jimPress?: boolean;
+  jim?: 'home' | 'invite' | 'claimed' | 'scheduled'; jimFinger?: JimFinger; jimPress?: boolean;
   /** Who has said yes (their circle turns green, their reply card shows). */
   replied: number;
   /** Which yes is in the air, flying to Dave's open spot. */
@@ -61,13 +61,14 @@ const TL: Step[] = [
   // his yes flies across into Dave's first open spot
   { at: 11250, out: true, lit: true, jim: 'claimed', replied: 1, back: 1, seated: 0 },
   { at: 12350, out: true, lit: true, jim: 'claimed', replied: 1, seated: 1 },
-  { at: 13300, out: true, lit: true, replied: 1, seated: 1 },
+  // …and his Home now has the round under Upcoming, ready to go
+  { at: 13300, out: true, lit: true, jim: 'scheduled', replied: 1, seated: 1 },
   // Rick's yes, straight from the group into the second spot
-  { at: 14000, out: true, lit: true, replied: 2, back: 2, seated: 1 },
-  { at: 15100, out: true, lit: true, replied: 2, seated: 2 },
-  { at: 16400, out: true, lit: true, replied: 2, seated: 2, late: true },
+  { at: 14600, out: true, lit: true, jim: 'scheduled', replied: 2, back: 2, seated: 1 },
+  { at: 15700, out: true, lit: true, jim: 'scheduled', replied: 2, seated: 2 },
+  { at: 17000, out: true, lit: true, jim: 'scheduled', replied: 2, seated: 2, late: true },
 ];
-const LOOP = 19800;
+const LOOP = 21000;
 const END: Step = { ...TL[TL.length - 1] };
 
 type Pt = { x: number; y: number };
@@ -156,7 +157,7 @@ export default function InviteScene() {
   const jimOrigin = geo ? `${geo.jb.x - geo.jimBox.left}px ${geo.jb.y - geo.jimBox.top}px` : '50% 0';
 
   return (
-    <div ref={root} className="invite" role="img" aria-label="Dave's Saturday tee time has two open spots. He taps Invite a group, picks Saturday Regulars, 50 golfers, and sends it. The invitations go out to all fifty at once. On Jim's phone the invitation is waiting on Home; he taps Respond, then I'm in, and his name fills Dave's first open spot. Rick's yes fills the second; Ken, a minute later, sees there are no open spots left.">
+    <div ref={root} className="invite" role="img" aria-label="Dave's Saturday tee time has two open spots. He taps Invite a group, picks Saturday Regulars, 50 golfers, and sends it. The invitations go out to all fifty at once. On Jim's phone the invitation is waiting on Home; he taps Respond, then I'm in; his name fills Dave's first open spot and the round appears on his Home under Upcoming. Rick's yes fills the second; Ken, a minute later, sees there are no open spots left.">
       <div ref={phone}>
         <Device tilt="flat" label="Dave's round on Backbeat Golf">
           <div ref={screen} className="gd" aria-hidden>
@@ -195,8 +196,8 @@ export default function InviteScene() {
         <div className={`iv-jim ${jimOpen ? 'open' : ''}`} style={geo ? { left: geo.jimBox.left, top: geo.jimBox.top, transformOrigin: jimOrigin } : undefined} aria-hidden>
           <Device tilt="flat" size="sm" label="Jim's phone">
             <div ref={jimScreen} className="gd">
-              <div className={`gd-scr ${s.jim === 'home' || !s.jim ? 'in' : 'left'}`}><JimHomeScreen respondRef={respondRef} hot={s.jimFinger === 'respond' && s.jimPress} /></div>
-              <div className={`gd-scr ${s.jim === 'invite' || s.jim === 'claimed' ? 'in' : 'right'}`}><JimInviteScreen inRef={inRef} hot={s.jimFinger === 'in' && s.jimPress} claimed={s.jim === 'claimed'} /></div>
+              <div className={`gd-scr ${s.jim === 'home' || s.jim === 'scheduled' || !s.jim ? 'in' : 'left'}`}><JimHomeScreen respondRef={respondRef} hot={s.jimFinger === 'respond' && s.jimPress} scheduled={s.jim === 'scheduled'} withRick={s.seated >= 2} /></div>
+              <div className={`gd-scr ${s.jim === 'invite' || s.jim === 'claimed' ? 'in' : s.jim === 'scheduled' ? 'right' : 'right'}`}><JimInviteScreen inRef={inRef} hot={s.jimFinger === 'in' && s.jimPress} claimed={s.jim === 'claimed'} /></div>
               <div className={`gd-finger ${s.jimFinger ? 'show' : ''} ${s.jimPress ? 'press' : ''}`} style={{ left: jLast.current.x, top: jLast.current.y }} />
             </div>
           </Device>

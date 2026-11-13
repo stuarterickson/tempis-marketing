@@ -5,6 +5,7 @@ import { ScoreEntryScreen } from './components/AppScreens';
 import CatchScene from './components/CatchScene';
 import InviteScene from './components/InviteScene';
 import GoalsScene from './components/GoalsScene';
+import OldScorecard from './components/OldScorecard';
 import Pledges from './components/Pledges';
 import './components/device.css';
 import { Wordmark } from './components/Wordmark';
@@ -80,23 +81,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Games and the wallet: the demo beside a pin sheet of the games */}
+      {/* Games and the wallet: the old way (a pencil scorecard) beside the new (the games demo) */}
       <section id="side-games" aria-labelledby="games-heading" className="scroll-mt-24 overflow-hidden border-t border-stone bg-ivory">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:px-8 md:py-28">
-          <div className="md:col-span-6">
-            <h2 id="games-heading" className="text-[2.25rem] leading-[1.08] md:text-[3rem]">Your games and your wallet, handled.</h2>
-            <p className="mt-5 max-w-lg text-[1.1875rem] leading-relaxed text-ink-soft">
-              Set the games and the stakes before the first tee. Backbeat keeps the running count as you play, shows every hole’s result, and settles up at the end: who pays whom, to the dollar, with the math one tap away.
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+          <div className="grid gap-6 md:grid-cols-12">
+            <h2 id="games-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Your games and your wallet, handled.</h2>
+            <p className="max-w-xl text-[1.1875rem] leading-relaxed text-ink-soft md:col-span-6 md:col-start-7">
+              No more Nassau and Wolf kept in pencil on the back of the card, worked out three times at the bar. Set the games and the stakes before the first tee. Backbeat keeps the running count as you play, shows every hole’s result, and settles up at the end: who pays whom, to the dollar, with the math one tap away.
             </p>
-            <ul className="mt-9 grid max-w-lg grid-cols-2 border-t-2 border-ink sm:grid-cols-3">
-              {SIDE_GAMES.map((g) => (
-                <li key={g} className="display border-b border-stone py-3 pr-3 text-[1.1875rem] leading-snug">{g}</li>
-              ))}
-            </ul>
           </div>
-          <div className="md:col-span-6 md:pl-6">
-            <GamesDemo />
+          <div className="games-stage mt-10 md:mt-14">
+            <figure className="old-card">
+              <OldScorecard />
+              <figcaption>The old way: pencil, eraser, and an argument at the bar.</figcaption>
+            </figure>
+            <div className="new-way"><GamesDemo /></div>
           </div>
+          <ul className="mt-14 grid grid-cols-2 border-t-2 border-ink sm:grid-cols-3 md:grid-cols-6">
+            {SIDE_GAMES.map((g) => (
+              <li key={g} className="display border-b border-stone py-3 pr-3 text-[1.1875rem] leading-snug">{g}</li>
+            ))}
+          </ul>
         </div>
       </section>
 
