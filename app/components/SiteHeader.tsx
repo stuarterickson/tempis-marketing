@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Wordmark } from './Wordmark';
+import { SITE } from '../site';
 
 const NAV = [
   { href: '/#how-it-works', label: 'How it works' },
@@ -23,7 +24,11 @@ export default function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Link href="/beta" className="btn btn-primary btn-sm whitespace-nowrap">Join the beta</Link>
+        <div className="flex shrink-0 items-center gap-4 md:gap-6">
+          {/* Golfers already on Backbeat sign in to the web app (app.backbeatgolf.com); this site has no accounts. */}
+          <a href={`${SITE.playWebUrl}/login`} className="hidden whitespace-nowrap text-[1.0625rem] text-ink-soft hover:text-ink md:inline">Sign in</a>
+          <Link href="/beta" className="btn btn-primary btn-sm whitespace-nowrap">Join the beta</Link>
+        </div>
       </div>
       <nav aria-label="Sections" className="flex gap-6 overflow-x-auto border-t border-stone px-5 py-2.5 md:hidden">
         {NAV.map((item) => (
@@ -31,6 +36,7 @@ export default function SiteHeader() {
             {item.label}
           </Link>
         ))}
+        <a href={`${SITE.playWebUrl}/login`} className="whitespace-nowrap text-base text-ink-soft">Sign in</a>
       </nav>
     </header>
   );

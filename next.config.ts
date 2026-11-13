@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
       { source: '/play', destination: '/', permanent: true },
       { source: '/studio', destination: '/clubs', permanent: true },
       { source: '/about', destination: '/', permanent: true },
-      { source: '/login', destination: 'https://play.tempislabs.com/login', permanent: false },
-      { source: '/privacy', destination: 'https://play.tempislabs.com/privacy', permanent: false },
+      { source: '/login', destination: 'https://app.backbeatgolf.com/login', permanent: false },
+      { source: '/privacy', destination: 'https://app.backbeatgolf.com/privacy', permanent: false },
       { source: '/terms', destination: '/support', permanent: false },
       { source: '/help', destination: '/support', permanent: false },
     ];
