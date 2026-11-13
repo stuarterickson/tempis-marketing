@@ -3,7 +3,7 @@ export const SITE = {
   name: 'Backbeat Golf',
   company: 'Backbeat Golf',
   legalName: 'Backbeat Golf LLC',
-  // TODO(CEO): backbeatgolf.com is not registered yet; the site still runs at its current address.
+  // Registered 2026-11-13; goes live once the Vercel project and DNS are set up.
   url: 'https://backbeatgolf.com',
   playWebUrl: 'https://play.tempislabs.com',
   privacyUrl: 'https://play.tempislabs.com/privacy',
