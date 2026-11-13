@@ -7,8 +7,9 @@ export const SITE = {
   url: 'https://backbeatgolf.com',
   playWebUrl: 'https://play.tempislabs.com',
   privacyUrl: 'https://play.tempislabs.com/privacy',
-  // TODO(CEO): confirm this inbox exists and who reads it before launch.
-  supportEmail: 'support@backbeatgolf.com',
+  // Temporary, per the CEO (2026-11-13): his own inbox until the business
+  // addresses exist. Switch to support@backbeatgolf.com once it's set up.
+  supportEmail: 'stuarterickson@yahoo.com',
   tagline: 'The scorecard, handled.',
 } as const;
 
