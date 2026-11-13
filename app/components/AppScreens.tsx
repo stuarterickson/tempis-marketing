@@ -252,3 +252,75 @@ export function GroupCardScreen() {
     </div>
   );
 }
+
+/* ---------- The catch: one hole, scored on two phones ---------- */
+
+export function HoleScreen({ rows, saveRef, keyRef, pressedSave }: {
+  rows: { name: string; note: string; chosen?: number; keyRefFor?: number }[];
+  saveRef?: React.Ref<HTMLSpanElement>;
+  keyRef?: React.Ref<HTMLDivElement>;
+  pressedSave?: boolean;
+}) {
+  return (
+    <div className="ap">
+      <StatusBar />
+      <div className="ap-top" style={{ justifyContent: 'space-between' }}>
+        <div>
+          <div className="ap-title">Hole 7</div>
+          <div className="ap-sub">Par 4, 412 yards</div>
+        </div>
+      </div>
+      <div className="ap-body">
+        {rows.map((g) => (
+          <div key={g.name} className="ap-card" style={{ padding: '10px 10px 11px', marginBottom: 8 }}>
+            <div className="ap-card-h"><b style={{ fontSize: 14 }}>{g.name}</b><span className="ap-sub">{g.note}</span></div>
+            <div className="ap-keys">
+              {[3, 4, 5, 6, 7].map((n) => (
+                <div key={n} ref={g.keyRefFor === n ? keyRef : undefined}
+                  className={`ap-key ${n === g.chosen ? 'on' : !g.chosen && n === 4 ? 'sg' : ''}`}>{n}</div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="ap-foot"><span ref={saveRef} className={`ap-btn ${pressedSave ? 'ap-pressed' : ''}`}>Save &amp; next</span></div>
+    </div>
+  );
+}
+
+/* ---------- The open invite: the organizer's round ---------- */
+
+export function OpenInviteScreen({ filled }: { filled: string[] }) {
+  const open = 2 - filled.length;
+  const seats = ['Stuart', 'Dave', ...filled, ...Array(open).fill(null)];
+  return (
+    <div className="ap">
+      <StatusBar />
+      <div className="ap-top">
+        <span className="ap-back">‹</span>
+        <div>
+          <div className="ap-title">Wellshire</div>
+          <div className="ap-sub">Saturday, 8:10 AM tee time</div>
+        </div>
+      </div>
+      <div className="ap-body" style={{ marginTop: 6 }}>
+        <div className="ap-card">
+          <div className="ap-game" style={{ fontSize: 14 }}><span className="ap-ico">✉</span>Your open invite</div>
+          <div className="ap-meta" style={{ marginTop: 6 }}>Sent to Saturday Regulars, 50 golfers</div>
+          <div style={{ marginTop: 8, fontSize: 13.5, fontWeight: 600, color: open ? '#171615' : '#21643E' }}>
+            {open ? `${open === 1 ? '1 spot' : `${open} spots`} open — first to say yes gets ${open === 1 ? 'it' : 'them'}.` : 'Every seat is taken.'}
+          </div>
+        </div>
+        <div className="ap-sec" style={{ padding: '6px 4px 6px' }}>Who’s playing</div>
+        <div className="ap-card" style={{ padding: '4px 12px' }}>
+          {seats.map((s, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
+              <span style={{ fontWeight: 600, color: s ? '#171615' : '#66635E' }}>{s ?? 'Open seat'}</span>
+              <span className="ap-sub">{s ? (i < 2 ? (i === 0 ? 'Organizer' : 'In') : 'Said yes first') : 'Waiting'}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

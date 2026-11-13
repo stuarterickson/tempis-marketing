@@ -111,3 +111,56 @@
 .fl-card small { display: block; font-size: 12px; color: #4C5857; }
 .fl-card b { font-weight: 700; }
 .fl-hide { opacity: 0; transform: translateY(10px); }
+
+/* ---------- More compositions ---------- */
+.dv-sm .dv-stage { zoom: 0.78; }
+.dv-face-left .dv-stage { transform: rotateY(24deg) rotateX(4deg); }
+.dv-face-right .dv-stage { transform: rotateY(-24deg) rotateX(4deg); }
+.dv-flat .dv-stage { transform: rotateX(18deg) rotateZ(-4deg); }
+@media (hover: hover) { .dv-face-left:hover .dv-stage, .dv-face-right:hover .dv-stage, .dv-flat:hover .dv-stage { transform: none; } }
+
+/* Macro: a phone close enough to touch, cropped by its frame */
+.macro { position: relative; height: 470px; overflow: hidden; border-radius: 28px; background: radial-gradient(120% 90% at 70% 10%, #FFFFFF, #EEE6DA 70%); border: 1px solid var(--color-stone); }
+.macro .dv { position: absolute; left: 50%; top: -40px; margin-left: -150px; padding: 0; transform: scale(1.55); transform-origin: 50% 0; }
+.macro .dv-stage { transform: rotateY(-14deg) rotateX(22deg) rotateZ(-8deg) !important; }
+.macro-tag { position: absolute; z-index: 5; right: 20px; bottom: 20px; }
+@media (max-width: 520px) { .macro { height: 380px; } .macro .dv { transform: scale(1.3); } }
+
+/* The catch: two phones and the dialog between them */
+.catch { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; perspective: 1800px; min-height: 560px; }
+.catch .dv { padding: 0 0 40px; }
+.catch-who { text-align: center; font-size: 15px; color: var(--color-ink-soft); margin-top: -18px; }
+.catch-dialog { position: absolute; z-index: 50; left: 50%; top: 46%; width: 300px; margin-left: -150px; transform: translateY(-50%) translateZ(160px) scale(0.92); opacity: 0; transition: opacity 360ms ease, transform 520ms cubic-bezier(.3,1.18,.45,1); }
+.catch-dialog.show { opacity: 1; transform: translateY(-50%) translateZ(160px) scale(1); }
+@media (max-width: 640px) { .catch { min-height: 500px; } .catch .dv-sm .dv-stage { zoom: 0.6; } .catch-dialog { width: 236px; margin-left: -118px; top: 56%; } .catch-dialog .dlg { padding: 12px; } .catch-dialog .dlg-tile b { font-size: 28px; } .catch-dialog .dlg-t { font-size: 16px; } .catch-dialog .dlg-q { font-size: 14px; margin: 8px 0; } }
+
+.dlg { background: #FCFAF7; color: #171615; border: 1px solid #AAA7A2; border-radius: 16px; padding: 16px; font-family: var(--font-sans); box-shadow: 0 40px 70px -30px rgba(16,48,29,0.6), 0 8px 20px rgba(16,48,29,0.12); }
+.dlg-h { display: flex; align-items: center; gap: 10px; }
+.dlg-hole { width: 36px; height: 36px; border-radius: 9px; background: #10301D; color: #FCFAF7; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; line-height: 1; }
+.dlg-hole small { font-size: 7px; letter-spacing: 0.08em; font-weight: 700; opacity: 0.8; }
+.dlg-t { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.dlg-q { font-size: 15px; margin: 12px 0 10px; }
+.dlg-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dlg-tile { border: 1.5px solid #7D7A75; border-radius: 14px; padding: 10px 8px 12px; text-align: center; background: linear-gradient(#FCFAF7, #EEE6DA); box-shadow: 0 3px 0 #AAA7A2; transition: all 220ms ease; }
+.dlg-tile b { display: block; font-size: 34px; line-height: 1.1; font-weight: 800; font-variant-numeric: tabular-nums; }
+.dlg-tile span { font-size: 12px; color: #66635E; }
+.dlg-tile.pick { background: #EBFAEF; border-color: #237849; box-shadow: inset 0 0 0 1px #237849; transform: translateY(3px); }
+.dlg-note { font-size: 12px; color: #66635E; margin-top: 12px; }
+
+/* The open invite: one phone, fifty golfers */
+.invite { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 28px; align-items: center; }
+.crowd { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; max-width: 420px; }
+.crowd i { aspect-ratio: 1; border-radius: 999px; background: #EEE6DA; border: 1px solid #D8CDBD; font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #66635E; transition: background 400ms ease, border-color 400ms ease, box-shadow 400ms ease, color 400ms ease, transform 400ms cubic-bezier(.3,1.18,.45,1); }
+.crowd i.lit { border-color: #65B683; box-shadow: 0 0 0 3px rgba(101,182,131,0.25); }
+.crowd i.won { background: #237849; border-color: #237849; color: #FCFAF7; transform: scale(1.18); }
+.crowd i.late { background: #F5F1EA; color: #AAA7A2; }
+.replies { position: relative; height: 150px; margin-top: 22px; max-width: 420px; }
+.reply { position: absolute; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #D7EFDE; border-radius: 14px; padding: 10px 14px; font-size: 15px; box-shadow: 0 20px 34px -22px rgba(16,48,29,0.45); opacity: 0; transform: translateY(12px); transition: opacity 400ms ease, transform 500ms cubic-bezier(.22,.61,.36,1); }
+.reply.show { opacity: 1; transform: none; }
+.reply small { color: #4C5857; font-size: 13px; }
+.reply .ok { color: #237849; font-weight: 700; }
+.reply .no { color: #66635E; font-weight: 600; }
+@media (max-width: 760px) { .invite { grid-template-columns: 1fr; } }
+
+/* Trust pledges */
+.pledge-ico { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--color-fairway-tint); color: var(--color-fairway); }

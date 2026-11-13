@@ -4,14 +4,16 @@
  * app's own colours). `tilt` picks which way it turns toward the reader.
  */
 
-export type Tilt = 'left' | 'right' | 'hero';
+export type Tilt = 'left' | 'right' | 'hero' | 'face-left' | 'face-right' | 'flat';
 
 export default function Device({
   children,
   tilt = 'right',
   label,
   float,
+  size = 'md',
 }: {
+  size?: 'md' | 'sm';
   children: React.ReactNode;
   tilt?: Tilt;
   label: string;
@@ -19,7 +21,7 @@ export default function Device({
   float?: React.ReactNode;
 }) {
   return (
-    <figure className={`dv dv-${tilt}`} role="img" aria-label={label}>
+    <figure className={`dv dv-${tilt} dv-${size}`} role="img" aria-label={label}>
       <div className="dv-stage">
         <div className="dv-floor" aria-hidden />
         <div className="dv-body">

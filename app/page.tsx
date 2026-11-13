@@ -1,33 +1,13 @@
 import Link from 'next/link';
 import Device from './components/Device';
 import GamesDemo from './components/GamesDemo';
-import { GroupCardScreen, ScoreEntryScreen } from './components/AppScreens';
+import { ScoreEntryScreen } from './components/AppScreens';
+import CatchScene from './components/CatchScene';
+import InviteScene from './components/InviteScene';
+import Pledges from './components/Pledges';
 import './components/device.css';
 import { Wordmark } from './components/Wordmark';
 import { SIDE_GAMES, SITE } from './site';
-
-const FEATURES = [
-  {
-    title: 'Score in a couple of taps.',
-    body: 'Big number keys, built for a moving cart and a gloved hand. Par is already suggested for every golfer. If the whole group made par, one tap saves the hole.',
-    picture: (
-      <Device tilt="right" label="Tempis Play's score entry: a row of big number keys for each golfer, with par suggested"
-        float={<div className="fl-card"><small>Hole 7</small>Two taps. <b>Saved.</b></div>}>
-        <ScoreEntryScreen />
-      </Device>
-    ),
-  },
-  {
-    title: 'One card for the whole group.',
-    body: 'Each golfer scores on his own phone, and everyone sees the same card, hole by hole. If two entries disagree, Play shows you before anyone signs.',
-    picture: (
-      <Device tilt="left" label="Tempis Play's group card: four golfers' scores on one card, ready to sign"
-        float={<div className="fl-card"><small>Group card</small>All four cards <b>match</b>.</div>}>
-        <GroupCardScreen />
-      </Device>
-    ),
-  },
-];
 
 const STEPS = [
   { title: 'Get the app', body: 'Free on iPhone and Android. Sign in with your email.' },
@@ -83,23 +63,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What it does */}
-      <section aria-labelledby="what-it-does">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
-          <h2 id="what-it-does" className="max-w-2xl text-[2.25rem] leading-[1.08] md:text-[3.25rem]">
-            Built for the cart, the group and the grill room.
-          </h2>
-          <div className="mt-14 space-y-20 md:mt-20 md:space-y-28">
-            {FEATURES.map((f, i) => (
-              <div key={f.title} className="grid items-center gap-10 md:grid-cols-12">
-                <div className={`md:col-span-5 ${i % 2 === 1 ? 'md:order-2 md:col-start-8' : ''}`}>
-                  <h3 className="text-[1.875rem] leading-tight md:text-[2.125rem]">{f.title}</h3>
-                  <p className="mt-4 max-w-md text-[1.1875rem] leading-relaxed text-ink-soft">{f.body}</p>
-                </div>
-                <div className={`md:col-span-6 ${i % 2 === 1 ? 'md:order-1 md:col-start-1' : 'md:col-start-7'}`}>{f.picture}</div>
-              </div>
-            ))}
+      {/* Score entry: a macro view, close enough to touch */}
+      <section aria-labelledby="score-heading">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:px-8 md:py-28">
+          <div className="md:col-span-5">
+            <h2 id="score-heading" className="text-[2.25rem] leading-[1.08] md:text-[3rem]">Score in a couple of taps.</h2>
+            <p className="mt-5 max-w-md text-[1.1875rem] leading-relaxed text-ink-soft">
+              Big number keys, built for a moving cart and a gloved hand. Par is already suggested for every golfer. If the whole group made par, one tap saves the hole.
+            </p>
           </div>
+          <div className="md:col-span-7">
+            <div className="macro" role="img" aria-label="A close view of Tempis Play's score keys: one row of big raised number keys for each golfer">
+              <Device tilt="flat" label="Score entry"><ScoreEntryScreen /></Device>
+              <div className="macro-tag fl-card"><small>Hole 7</small>Two taps. <b>Saved.</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The catch: two phones, one dialog */}
+      <section aria-labelledby="catch-heading" className="border-t border-stone">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+          <div className="grid gap-6 md:grid-cols-12">
+            <h2 id="catch-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Differences caught on the spot.</h2>
+            <p className="max-w-xl text-[1.1875rem] leading-relaxed text-ink-soft md:col-span-6 md:col-start-7">
+              Each golfer can score on his own phone. If Tom enters a 4 for Bob and Bob entered a 5, Play catches it the moment Tom saves the hole and asks which is right. No arguments at the 18th green, and nobody signs a card that doesn’t match.
+            </p>
+          </div>
+          <div className="mt-10 md:mt-14"><CatchScene /></div>
+        </div>
+      </section>
+
+      {/* The open invite: one phone, fifty golfers */}
+      <section aria-labelledby="invite-heading" className="border-t border-stone bg-ivory">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+          <div className="grid gap-6 md:grid-cols-12">
+            <h2 id="invite-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Fill your tee time without the texts.</h2>
+            <p className="max-w-xl text-[1.1875rem] leading-relaxed text-ink-soft md:col-span-6 md:col-start-7">
+              Two open spots on Saturday? Send one open invite to your whole group. Everyone hears at once, and the first to tap <b className="text-ink">I’m in</b> gets the seat. Anyone who answers late simply sees the seats are taken. No group texts, no keeping track, no telling a friend he missed out.
+            </p>
+          </div>
+          <div className="mt-12 md:mt-16"><InviteScene /></div>
+        </div>
+      </section>
+
+      {/* Trust: what a golfer needs to know first */}
+      <section aria-labelledby="trust-heading" className="border-t border-stone">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+          <h2 id="trust-heading" className="max-w-3xl text-[2.25rem] leading-[1.08] md:text-[3.25rem]">Built to be trusted with your card and your wallet.</h2>
+          <div className="mt-12"><Pledges /></div>
         </div>
       </section>
 
