@@ -74,7 +74,7 @@ export default function GamesDemo() {
   return (
     <Device
       tilt="hero"
-      label="Tempis Play: a finger opens Skins from the round's games, the hole-by-hole board slides in, and Settle up shows who pays whom"
+      label="Backbeat Golf: a finger opens Skins from the round's games, the hole-by-hole board slides in, and Settle up shows who pays whom"
       float={
         <div className={`fl-card ${step.float ? '' : 'fl-hide'}`}>
           <small>Settled at the 18th green</small>

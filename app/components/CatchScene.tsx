@@ -6,7 +6,7 @@ import { HoleScreen } from './AppScreens';
 
 /*
  * Differences caught as you play: Bob scores himself a 5 on his phone;
- * Tom, keeping the group's card, taps 4 for Bob and saves. Play stops
+ * Tom, keeping the group's card, taps 4 for Bob and saves. Backbeat stops
  * and asks which is Bob's score. Tom picks 5. About 10 seconds a loop.
  */
 

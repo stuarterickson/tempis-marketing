@@ -4,6 +4,7 @@ import GamesDemo from './components/GamesDemo';
 import { ScoreEntryScreen } from './components/AppScreens';
 import CatchScene from './components/CatchScene';
 import InviteScene from './components/InviteScene';
+import GoalsScene from './components/GoalsScene';
 import Pledges from './components/Pledges';
 import './components/device.css';
 import { Wordmark } from './components/Wordmark';
@@ -25,7 +26,7 @@ const STUDIO_JOBS = [
 const FAQ = [
   {
     q: 'What does it cost?',
-    a: 'Tempis Play is free. Clubs that run their season on Tempis Studio pay for Studio; their members still use Play for free.',
+    a: 'Backbeat is free. Clubs that run their season on Backbeat for Clubs pay for it; their members still use Backbeat for free.',
   },
   {
     q: 'iPhone or Android?',
@@ -33,7 +34,7 @@ const FAQ = [
   },
   {
     q: 'Does everyone in my group need the app?',
-    a: 'No. One golfer can keep score for the whole group. If the others have Play too, each scores on his own phone and sees the same card.',
+    a: 'No. One golfer can keep score for the whole group. If the others have Backbeat too, each scores on his own phone and sees the same card.',
   },
   {
     q: 'When can I get it?',
@@ -44,36 +45,21 @@ const FAQ = [
 export default function Home() {
   return (
     <>
-      {/* Opening: the headline beside the games demo */}
+      {/* Opening: the scorecard — a macro view of the keys, close enough to touch */}
       <section className="overflow-hidden">
-        <div className="mx-auto grid max-w-6xl items-center gap-6 px-5 pt-12 md:grid-cols-12 md:px-8 md:pt-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pt-12 pb-16 md:grid-cols-12 md:px-8 md:pt-20 md:pb-24">
           <div className="md:col-span-6">
             <h1 className="text-[3.25rem] leading-[1.0] md:text-[5rem] md:leading-[0.98]">{SITE.tagline}</h1>
             <p className="mt-7 max-w-lg text-[1.25rem] leading-relaxed text-ink-soft">
-              Tempis Play keeps score for you and your group, settles the side games, and remembers every round. Free on iPhone and Android.
+              Backbeat Golf keeps score for your group with big keys built for a moving cart and a gloved hand. Par is already suggested for every golfer, so if the whole group made par, one tap saves the hole. Free on iPhone and Android.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/beta" className="btn btn-primary">Join the beta</Link>
               <Link href="/#how-it-works" className="btn btn-secondary">See how it works</Link>
             </div>
           </div>
-          <div className="md:col-span-6 md:pl-6">
-            <GamesDemo />
-          </div>
-        </div>
-      </section>
-
-      {/* Score entry: a macro view, close enough to touch */}
-      <section aria-labelledby="score-heading">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:px-8 md:py-28">
-          <div className="md:col-span-5">
-            <h2 id="score-heading" className="text-[2.25rem] leading-[1.08] md:text-[3rem]">Score in a couple of taps.</h2>
-            <p className="mt-5 max-w-md text-[1.1875rem] leading-relaxed text-ink-soft">
-              Big number keys, built for a moving cart and a gloved hand. Par is already suggested for every golfer. If the whole group made par, one tap saves the hole.
-            </p>
-          </div>
-          <div className="md:col-span-7">
-            <div className="macro" role="img" aria-label="A close view of Tempis Play's score keys: one row of big raised number keys for each golfer">
+          <div className="md:col-span-6">
+            <div className="macro" role="img" aria-label="A close view of Backbeat's score keys: one row of big raised number keys for each golfer">
               <Device tilt="flat" label="Score entry"><ScoreEntryScreen /></Device>
               <div className="macro-tag fl-card"><small>Hole 7</small>Two taps. <b>Saved.</b></div>
             </div>
@@ -87,20 +73,54 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-12">
             <h2 id="catch-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Differences caught on the spot.</h2>
             <p className="max-w-xl text-[1.1875rem] leading-relaxed text-ink-soft md:col-span-6 md:col-start-7">
-              Each golfer can score on his own phone. If Tom enters a 4 for Bob and Bob entered a 5, Play catches it the moment Tom saves the hole and asks which is right. No arguments at the 18th green, and nobody signs a card that doesn’t match.
+              Each golfer can score on his own phone. If Tom enters a 4 for Bob and Bob entered a 5, Backbeat catches it the moment Tom saves the hole and asks which is right. No arguments at the 18th green, and nobody signs a card that doesn’t match.
             </p>
           </div>
           <div className="mt-10 md:mt-14"><CatchScene /></div>
         </div>
       </section>
 
-      {/* The open invite: one phone, fifty golfers */}
-      <section aria-labelledby="invite-heading" className="border-t border-stone bg-ivory">
+      {/* Games and the wallet: the demo beside a pin sheet of the games */}
+      <section id="side-games" aria-labelledby="games-heading" className="scroll-mt-24 overflow-hidden border-t border-stone bg-ivory">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:px-8 md:py-28">
+          <div className="md:col-span-6">
+            <h2 id="games-heading" className="text-[2.25rem] leading-[1.08] md:text-[3rem]">Your games and your wallet, handled.</h2>
+            <p className="mt-5 max-w-lg text-[1.1875rem] leading-relaxed text-ink-soft">
+              Set the games and the stakes before the first tee. Backbeat keeps the running count as you play, shows every hole’s result, and settles up at the end: who pays whom, to the dollar, with the math one tap away.
+            </p>
+            <ul className="mt-9 grid max-w-lg grid-cols-2 border-t-2 border-ink sm:grid-cols-3">
+              {SIDE_GAMES.map((g) => (
+                <li key={g} className="display border-b border-stone py-3 pr-3 text-[1.1875rem] leading-snug">{g}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="md:col-span-6 md:pl-6">
+            <GamesDemo />
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics and goals */}
+      <section id="goals" aria-labelledby="goals-heading" className="scroll-mt-24 overflow-hidden border-t border-stone">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-28">
+          <div className="md:col-span-5">
+            <h2 id="goals-heading" className="text-[2.25rem] leading-[1.08] md:text-[3rem]">Know where your game is headed.</h2>
+            <p className="mt-5 max-w-md text-[1.1875rem] leading-relaxed text-ink-soft">
+              Set a goal for the numbers you care about: score, putts, greens, fairways. After every round Backbeat shows which goals you met and how close you came on the rest. Your last rounds sit beside each goal, so you can see the trend at a glance.
+            </p>
+            <p className="mt-4 max-w-md text-ink-soft">Putts, fairways and greens are one extra tap per hole, and only if you want them.</p>
+          </div>
+          <div className="md:col-span-7"><GoalsScene /></div>
+        </div>
+      </section>
+
+      {/* The open invite: book the time, send one invite, the seats fill themselves */}
+      <section aria-labelledby="invite-heading" className="overflow-hidden border-t border-stone bg-ivory">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
           <div className="grid gap-6 md:grid-cols-12">
-            <h2 id="invite-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Fill your tee time without the texts.</h2>
+            <h2 id="invite-heading" className="text-[2.25rem] leading-[1.08] md:col-span-5 md:text-[3rem]">Book the time. Backbeat fills the seats.</h2>
             <p className="max-w-xl text-[1.1875rem] leading-relaxed text-ink-soft md:col-span-6 md:col-start-7">
-              Two open spots on Saturday? Send one open invite to your whole group. Everyone hears at once, and the first to tap <b className="text-ink">I’m in</b> gets the seat. Anyone who answers late simply sees the seats are taken. No group texts, no keeping track, no telling a friend he missed out.
+              Two open spots on Saturday? Tap <b className="text-ink">Invite a group</b>, pick the group, and send. All fifty hear at once, and the first to tap <b className="text-ink">I’m in</b> take the seats. Anyone who answers late simply sees they’re taken. No group texts, no keeping track, no telling a friend he missed out.
             </p>
           </div>
           <div className="mt-12 md:mt-16"><InviteScene /></div>
@@ -133,36 +153,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Side games: set like a pin sheet */}
-      <section id="side-games" aria-labelledby="games-heading" className="scroll-mt-24 border-t border-stone">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-12 md:px-8 md:py-28">
-          <div className="md:col-span-4">
-            <h2 id="games-heading" className="text-[2.25rem] leading-[1.1] md:text-[3rem]">The games your group already plays</h2>
-            <p className="mt-5 text-[1.1875rem] leading-relaxed text-ink-soft">
-              Set the stakes once. Play keeps the running count during the round and settles it at the end, with handicaps applied the way you choose.
-            </p>
-          </div>
-          <ul className="grid grid-cols-2 border-t-2 border-ink md:col-span-7 md:col-start-6 md:grid-cols-3">
-            {SIDE_GAMES.map((g) => (
-              <li key={g} className="display border-b border-stone py-4 pr-3 text-[1.375rem] leading-snug">{g}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Studio: the honour board */}
+      {/* Backbeat for Clubs: the honour board */}
       <section aria-labelledby="studio-heading" className="bg-graphite text-on-dark">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-12 md:px-8 md:py-28">
           <div className="md:col-span-6">
-            <Wordmark product="Studio" onDark height={34} />
+            <Wordmark product="Clubs" onDark height={34} />
             <h2 id="studio-heading" className="mt-8 text-[2.25rem] leading-[1.08] md:text-[3.25rem]">
               Your board runs the season. Your members just play.
             </h2>
             <div className="mt-8 h-px w-28 bg-gold" />
             <p className="mt-8 max-w-lg text-[1.1875rem] leading-relaxed text-on-dark-soft">
-              Tempis Studio is coming for men’s and women’s golf clubs. Everything the board sets up shows in the same Play app members use for their Saturday game.
+              Backbeat for Clubs is coming for men’s and women’s golf clubs. Everything the board sets up shows in the same Backbeat app members use for their Saturday game.
             </p>
-            <Link href="/clubs" className="btn btn-on-dark mt-9">Join the Studio list</Link>
+            <Link href="/clubs" className="btn btn-on-dark mt-9">Join the clubs list</Link>
           </div>
           <dl className="self-end md:col-span-5 md:col-start-8">
             {STUDIO_JOBS.map((j) => (

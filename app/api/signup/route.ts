@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 
 /*
- * Beta applications and Studio waitlist sign-ups.
+ * Beta applications and Backbeat for Clubs waitlist sign-ups.
  *
  * Each sign-up is emailed to the team inbox through Resend (the email service
- * the Tempis apps already use). Needs, in the hosting environment:
+ * the Backbeat apps already use). Needs, in the hosting environment:
  *   RESEND_API_KEY     — a Resend key allowed to send from SIGNUP_FROM_EMAIL
  *   SIGNUP_TO_EMAIL    — the inbox that receives sign-ups
- *   SIGNUP_FROM_EMAIL  — a verified sender, e.g. "Tempis Labs <hello@tempislabs.com>"
+ *   SIGNUP_FROM_EMAIL  — a verified sender, e.g. "Backbeat Golf <hello@backbeatgolf.com>"
  * Without them the form says it couldn't send; nothing is silently dropped.
  */
 
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'We couldn’t send that just now. Please email us instead.' }, { status: 503 });
   }
 
-  const subject = kind === 'beta' ? `Beta application: ${values.name}` : `Studio list: ${values.club || values.name}`;
+  const subject = kind === 'beta' ? `Beta application: ${values.name}` : `Backbeat for Clubs list: ${values.club || values.name}`;
   const rows = Object.entries(values)
     .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#4F4D49">${escapeHtml(k)}</td><td style="padding:4px 0">${escapeHtml(v || '—')}</td></tr>`)
     .join('');

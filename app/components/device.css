@@ -148,19 +148,79 @@
 .dlg-note { font-size: 12px; color: #66635E; margin-top: 12px; }
 
 /* The open invite: one phone, fifty golfers */
-.invite { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 28px; align-items: center; }
-.crowd { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; max-width: 420px; }
+.invite { position: relative; display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 48px; align-items: center; }
+.iv-label { font-weight: 650; font-size: 17px; margin-bottom: 12px; }
+.iv-label span { font-weight: 400; color: #4C5857; margin-left: 6px; }
+.crowd { display: grid; grid-template-columns: repeat(10, 1fr); gap: 9px; max-width: 520px; }
 .crowd i { aspect-ratio: 1; border-radius: 999px; background: #EEE6DA; border: 1px solid #D8CDBD; font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #66635E; transition: background 400ms ease, border-color 400ms ease, box-shadow 400ms ease, color 400ms ease, transform 400ms cubic-bezier(.3,1.18,.45,1); }
 .crowd i.lit { border-color: #65B683; box-shadow: 0 0 0 3px rgba(101,182,131,0.25); }
 .crowd i.won { background: #237849; border-color: #237849; color: #FCFAF7; transform: scale(1.18); }
 .crowd i.late { background: #F5F1EA; color: #AAA7A2; }
-.replies { position: relative; height: 150px; margin-top: 22px; max-width: 420px; }
-.reply { position: absolute; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #D7EFDE; border-radius: 14px; padding: 10px 14px; font-size: 15px; box-shadow: 0 20px 34px -22px rgba(16,48,29,0.45); opacity: 0; transform: translateY(12px); transition: opacity 400ms ease, transform 500ms cubic-bezier(.22,.61,.36,1); }
+.replies { display: grid; gap: 8px; margin-top: 22px; max-width: 520px; }
+.reply { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #D7EFDE; border-radius: 14px; padding: 10px 14px; font-size: 15px; box-shadow: 0 20px 34px -22px rgba(16,48,29,0.45); opacity: 0; transform: translateY(12px); transition: opacity 400ms ease, transform 500ms cubic-bezier(.22,.61,.36,1); }
 .reply.show { opacity: 1; transform: none; }
 .reply small { color: #4C5857; font-size: 13px; }
 .reply .ok { color: #237849; font-weight: 700; }
 .reply .no { color: #66635E; font-weight: 600; }
-@media (max-width: 760px) { .invite { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .invite { grid-template-columns: 1fr; gap: 28px; } }
+/* the round's open-invite card arrives once it's sent; seats fill with a small pop */
+.iv-out { display: none; }
+.iv-out.show { display: block; animation: iv-pop 480ms cubic-bezier(.3,1.18,.45,1); }
+.iv-seat { animation: iv-seat 900ms ease; }
+@keyframes iv-pop { from { opacity: 0; transform: translateY(-6px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes iv-seat { 0% { background: #D7EFDE; } 100% { background: transparent; } }
+/* the Invite a group sheet rises from the bottom, as in the app */
+.iv-scrim { position: absolute; inset: 0; background: rgba(23,22,21,0.32); opacity: 0; transition: opacity 300ms ease; pointer-events: none; }
+.iv-scrim.show { opacity: 1; }
+.iv-sheet { position: absolute; left: 0; right: 0; bottom: 0; top: 96px; background: #FCFAF7; border-radius: 18px 18px 0 0; transform: translateY(102%); transition: transform 520ms cubic-bezier(.22,.61,.36,1); font-family: var(--font-sans); color: #171615; font-size: 13px; line-height: 1.35; }
+.iv-sheet.show { transform: none; }
+/* invitations in the air */
+.iv-air { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
+.iv-env { position: absolute; left: 0; top: 0; width: 30px; height: 21px; margin: -10px 0 0 -15px; border-radius: 4px; background: #FCFAF7; border: 1.5px solid #237849; box-shadow: 0 10px 18px -8px rgba(16,48,29,.55); opacity: 0; }
+.iv-env::after { content: ''; position: absolute; left: 2px; right: 2px; top: 1px; height: 11px; border-bottom: 1.5px solid #237849; border-left: 1.5px solid transparent; border-right: 1.5px solid transparent; transform: skewY(0); clip-path: polygon(0 0, 100% 0, 50% 100%); background: #D7EFDE; }
+.iv-env.out { animation: iv-fly 1300ms cubic-bezier(.45,0,.25,1) both; }
+.iv-env.back { background: #237849; animation: iv-fly 900ms cubic-bezier(.45,0,.25,1) both; }
+.iv-env.back::after { background: #65B683; border-bottom-color: #FCFAF7; }
+@keyframes iv-fly {
+  0% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(.5); }
+  12% { opacity: 1; }
+  50% { transform: translate(calc((var(--sx) + var(--tx)) / 2), calc((var(--sy) + var(--ty)) / 2 - 60px)) scale(1.15) rotate(-6deg); }
+  82% { opacity: 1; transform: translate(var(--tx), var(--ty)) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(.6); }
+}
+@media (prefers-reduced-motion: reduce) { .iv-sheet, .iv-scrim { transition: none; } .iv-out.show, .iv-seat { animation: none; } }
 
 /* Trust pledges */
 .pledge-ico { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--color-fairway-tint); color: var(--color-fairway); }
+
+/* Stats and goals: the phone face-on, the round's tiles lifted out in front */
+.goals-scene { position: relative; perspective: 1800px; display: flex; justify-content: center; padding: 10px 0 20px; }
+.goals-scene .dv-flat .dv-stage { transform: rotateX(8deg); }
+.goals-float { position: absolute; z-index: 40; }
+.goals-float-a { left: calc(50% - 330px); top: 120px; transform: rotate(-4deg); }
+.goals-float-b { right: calc(50% - 320px); top: 300px; transform: rotate(3deg); }
+.goals-float-c { left: calc(50% - 300px); bottom: 70px; }
+.goal-tile { width: 170px; background: #FCFAF7; border: 1.5px solid #D8CDBD; border-radius: 16px; padding: 12px 14px; font-family: var(--font-sans); color: #171615; box-shadow: 0 34px 50px -26px rgba(16,48,29,0.5), 0 2px 6px rgba(16,48,29,0.08); }
+.goal-tile.met { border-color: #C49B38; }
+.gt-name { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; }
+.gt-check { color: #795B02; }
+.gt-row { display: flex; align-items: baseline; justify-content: space-between; margin-top: 4px; }
+.gt-row b { font-size: 34px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.gt-row span { font-size: 14px; font-weight: 600; color: #66635E; }
+.goal-tile.met .gt-row span { color: #795B02; font-weight: 700; }
+.gt-target { font-size: 12px; color: #66635E; }
+@media (max-width: 760px) {
+  .goals-float-a { left: auto; right: 4px; top: 6px; }
+  .goals-float-b { right: 6px; top: 330px; }
+  .goals-float-c { left: 12px; bottom: 40px; }
+  .goal-tile { width: 142px; padding: 10px 12px; }
+  .gt-row b { font-size: 28px; }
+}
+@media (max-width: 640px) {
+  .invite { gap: 14px; }
+  .invite .dv-stage { zoom: 0.6; }
+  .invite > div:first-child { display: flex; justify-content: center; margin-bottom: -50px; }
+  .crowd { gap: 6px; }
+  .crowd i { font-size: 9px; }
+  .reply { font-size: 14px; padding: 8px 12px; }
+}

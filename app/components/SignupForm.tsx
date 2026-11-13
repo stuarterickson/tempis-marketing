@@ -86,8 +86,8 @@ export default function SignupForm({ kind }: { kind: Kind }) {
         <h2 className="text-[1.5rem] font-bold">Thanks{firstName ? `, ${firstName}` : ''}.</h2>
         <p className="mt-2 text-ink-soft">
           {kind === 'beta'
-            ? 'We’ll email you within a week. If there’s a spot, the email has everything you need to install Tempis Play.'
-            : 'You’re on the Studio list. We’ll be in touch to set up a 15-minute look at Studio with you and your board.'}
+            ? 'We’ll email you within a week. If there’s a spot, the email has everything you need to install Backbeat Golf.'
+            : 'You’re on the Backbeat for Clubs list. We’ll be in touch to set up a 15-minute look with you and your board.'}
         </p>
       </div>
     );
@@ -141,7 +141,7 @@ export default function SignupForm({ kind }: { kind: Kind }) {
       )}
 
       <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
-        {status === 'sending' ? 'Sending…' : kind === 'beta' ? 'Apply for the beta' : 'Join the Studio list'}
+        {status === 'sending' ? 'Sending…' : kind === 'beta' ? 'Apply for the beta' : 'Join the clubs list'}
       </button>
     </form>
   );

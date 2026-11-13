@@ -1,6 +1,6 @@
 /*
  * What a club golfer needs to know before he trusts his card, and his
- * wallet, to an app. Each line is something Play actually does.
+ * wallet, to an app. Each line is something Backbeat actually does.
  */
 
 const I = {
@@ -13,7 +13,7 @@ const I = {
 };
 
 const PLEDGES: { icon: keyof typeof I; title: string; body: string }[] = [
-  { icon: 'check', title: 'Every score is checked.', body: 'When two phones disagree on a hole, Play stops and asks which score is right, before anyone signs.' },
+  { icon: 'check', title: 'Every score is checked.', body: 'When two phones disagree on a hole, Backbeat stops and asks which score is right, before anyone signs.' },
   { icon: 'save', title: 'Nothing gets lost.', body: 'Each hole is saved as you go. If the signal drops on the back nine, scores wait on the phone and go through when it returns.' },
   { icon: 'sign', title: 'Nothing is final until you sign.', body: 'Each golfer reviews and signs his own card. Fix any hole before then.' },
   { icon: 'dollar', title: 'Every dollar shows its work.', body: 'Tap any hole to see who won it and why. The settle-up adds up to the dollar.' },

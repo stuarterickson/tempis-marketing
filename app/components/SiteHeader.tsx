@@ -3,7 +3,8 @@ import { Wordmark } from './Wordmark';
 
 const NAV = [
   { href: '/#how-it-works', label: 'How it works' },
-  { href: '/#side-games', label: 'Side games' },
+  { href: '/#side-games', label: 'Games' },
+  { href: '/#goals', label: 'Stats' },
   { href: '/clubs', label: 'For clubs' },
   { href: '/support', label: 'Help' },
 ];
@@ -12,7 +13,7 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-stone bg-oat/95 backdrop-blur supports-[backdrop-filter]:bg-oat/90">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-8">
-        <Link href="/" aria-label="Tempis Play home" className="shrink-0">
+        <Link href="/" aria-label="Backbeat Golf home" className="shrink-0">
           <span className="md:hidden"><Wordmark height={28} /></span><span className="hidden md:block"><Wordmark height={34} /></span>
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-8 md:flex">

@@ -1,6 +1,6 @@
 /*
  * A realistic phone, set at an angle in 3D with a soft floor shadow.
- * The screen inside is whatever the page puts there (drawn in the Play
+ * The screen inside is whatever the page puts there (drawn in the Backbeat
  * app's own colours). `tilt` picks which way it turns toward the reader.
  */
 

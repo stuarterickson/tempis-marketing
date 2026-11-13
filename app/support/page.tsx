@@ -4,7 +4,7 @@ import { SITE } from '../site';
 
 export const metadata: Metadata = {
   title: 'Help',
-  description: 'Get help with Tempis Play.',
+  description: 'Get help with Backbeat Golf.',
 };
 
 const TOPICS = [

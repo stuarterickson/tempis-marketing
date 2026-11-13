@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import '@fontsource-variable/inter/opsz.css';
-import '@fontsource-variable/inter/opsz-italic.css';
+import '@fontsource-variable/schibsted-grotesk';
 import './globals.css';
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description:
-    'Tempis Play keeps score for you and your group, settles the side games, and remembers every round. Free on iPhone and Android.',
+    'Backbeat Golf keeps score for you and your group, settles the side games, and remembers every round. Free on iPhone and Android.',
   openGraph: {
     title: `${SITE.name} — ${SITE.tagline}`,
     description: 'Scoring, group rounds and side games that settle themselves. Free on iPhone and Android.',

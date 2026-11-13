@@ -13,12 +13,12 @@ export default function SiteFooter() {
           </p>
         </div>
         <div>
-          <h2 className="font-sans text-base font-semibold tracking-normal">Tempis Play</h2>
+          <h2 className="font-sans text-base font-semibold tracking-normal">Backbeat Golf</h2>
           <ul className="mt-3 space-y-2 text-base text-ink-soft">
             <li><Link href="/beta" className="hover:text-ink hover:underline">Join the beta</Link></li>
             <li><Link href="/#how-it-works" className="hover:text-ink hover:underline">How it works</Link></li>
             <li><a href={SITE.playWebUrl} className="hover:text-ink hover:underline">Sign in on the web</a></li>
-            <li><Link href="/clubs" className="hover:text-ink hover:underline">Tempis Studio for clubs</Link></li>
+            <li><Link href="/clubs" className="hover:text-ink hover:underline">Backbeat for Clubs</Link></li>
           </ul>
         </div>
         <div>
@@ -32,7 +32,7 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-stone">
         <p className="mx-auto max-w-6xl px-5 py-5 text-sm text-ink-soft md:px-8">
-          © {new Date().getFullYear()} {SITE.company}. All rights reserved.
+          © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
         </p>
       </div>
     </footer>

@@ -1,19 +1,20 @@
 /* eslint-disable @next/next/no-img-element -- the lockups are outlined SVGs; Next's image pipeline adds nothing here */
 
 /**
- * The Tempis lockups: the mark, "Tempis" in Besley and the product name in
- * Besley italic. Drawn as outlines (public/brand), never retyped.
+ * The Backbeat lockups: the mark, "Backbeat" in Schibsted Grotesk and the second
+ * part in its italic (Golf, or for Clubs). Drawn as outlines (public/brand), never retyped.
  */
 export function Wordmark({
-  product = 'Play',
+  product = 'Golf',
   onDark = false,
   height = 36,
 }: {
-  product?: 'Play' | 'Studio';
+  product?: 'Golf' | 'Clubs';
   onDark?: boolean;
   height?: number;
 }) {
-  const file = `/brand/tempis-${product.toLowerCase()}-lockup${onDark ? '-reversed' : ''}.svg`;
-  const width = Math.round(height * (product === 'Play' ? 318 : 359) / 64);
-  return <img src={file} alt={`Tempis ${product}`} width={width} height={height} className="block" />;
+  const file = `/brand/backbeat-${product.toLowerCase()}-lockup${onDark ? '-reversed' : ''}.svg`;
+  const width = Math.round(height * (product === 'Golf' ? 367 : 465) / 64);
+  const alt = product === 'Golf' ? 'Backbeat Golf' : 'Backbeat for Clubs';
+  return <img src={file} alt={alt} width={width} height={height} className="block" />;
 }

@@ -3,19 +3,19 @@ import { SITE } from '../site';
 
 export const metadata: Metadata = {
   title: 'Delete your account',
-  description: 'How to delete your Tempis Play account and what happens to your information.',
+  description: 'How to delete your Backbeat Golf account and what happens to your information.',
 };
 
 export default function DeleteAccountPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-12 md:py-20">
-      <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight">Delete your Tempis Play account</h1>
+      <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight">Delete your Backbeat Golf account</h1>
 
       <h2 className="mt-10 text-[1.5rem] font-bold">In the app</h2>
       <ol className="mt-3 list-decimal space-y-2 pl-6">
-        <li>Open Tempis Play and go to your <strong>Profile</strong>.</li>
+        <li>Open Backbeat and go to your <strong>Profile</strong>.</li>
         <li>Scroll to the bottom, under <strong>Sign out</strong>.</li>
-        <li>Tap <strong>Delete my account</strong>. Play shows what will be removed before you confirm.</li>
+        <li>Tap <strong>Delete my account</strong>. Backbeat shows what will be removed before you confirm.</li>
       </ol>
 
       <h2 className="mt-10 text-[1.5rem] font-bold">By email</h2>

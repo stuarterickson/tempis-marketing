@@ -1,5 +1,5 @@
 /*
- * Play's screens, redrawn in the app's own colours and type for the site.
+ * Backbeat's screens, redrawn in the app's own colours and type for the site.
  * The numbers all agree: Skins ($5 a man, 4 skins at $5) and Nassau ($2 a
  * side, Tom & Dave against Mike & Bill) net to Tom +$12, Dave +$2,
  * Mike −$7, Bill −$7, which is exactly who-pays-whom below.
@@ -290,7 +290,7 @@ export function HoleScreen({ rows, saveRef, keyRef, pressedSave }: {
 
 /* ---------- The open invite: the organizer's round ---------- */
 
-export function OpenInviteScreen({ filled }: { filled: string[] }) {
+export function OpenInviteScreen({ filled, out, inviteRef, hot }: { filled: string[]; out?: boolean; inviteRef?: React.Ref<HTMLSpanElement>; hot?: boolean }) {
   const open = 2 - filled.length;
   const seats = ['Stuart', 'Dave', ...filled, ...Array(open).fill(null)];
   return (
@@ -304,7 +304,7 @@ export function OpenInviteScreen({ filled }: { filled: string[] }) {
         </div>
       </div>
       <div className="ap-body" style={{ marginTop: 6 }}>
-        <div className="ap-card">
+        <div className={`ap-card iv-out ${out ? 'show' : ''}`}>
           <div className="ap-game" style={{ fontSize: 14 }}><span className="ap-ico">✉</span>Your open invite</div>
           <div className="ap-meta" style={{ marginTop: 6 }}>Sent to Saturday Regulars, 50 golfers</div>
           <div style={{ marginTop: 8, fontSize: 13.5, fontWeight: 600, color: open ? '#171615' : '#21643E' }}>
@@ -314,9 +314,106 @@ export function OpenInviteScreen({ filled }: { filled: string[] }) {
         <div className="ap-sec" style={{ padding: '6px 4px 6px' }}>Who’s playing</div>
         <div className="ap-card" style={{ padding: '4px 12px' }}>
           {seats.map((s, i) => (
-            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
-              <span style={{ fontWeight: 600, color: s ? '#171615' : '#66635E' }}>{s ?? 'Open seat'}</span>
-              <span className="ap-sub">{s ? (i < 2 ? (i === 0 ? 'Organizer' : 'In') : 'Said yes first') : 'Waiting'}</span>
+            <div key={i} className={i > 1 && s ? 'iv-seat' : ''} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '9px 0', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
+              <span style={{ fontWeight: 600, color: s ? '#171615' : '#66635E' }}>{s ?? 'Open spot'}</span>
+              <span className="ap-sub" style={i > 1 && s ? { color: '#21643E', fontWeight: 600 } : undefined}>{s ? (i < 2 ? (i === 0 ? 'Organizer' : 'In') : 'Said yes first') : out ? 'Invite out' : ''}</span>
+            </div>
+          ))}
+        </div>
+        {!out && (
+          <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
+            <span ref={inviteRef} className={`ap-btn ap-btn2 gd-hl ${hot ? 'ap-pressed' : ''}`} style={{ height: 38, fontSize: 13.5, padding: '0 12px', whiteSpace: 'nowrap' }}>👥&nbsp; Invite a group</span>
+            <span className="ap-btn ap-btn2" style={{ height: 38, fontSize: 13.5, padding: '0 12px', whiteSpace: 'nowrap' }}>Add a player</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const GROUPS = [
+  { name: 'Saturday Regulars', n: 50 },
+  { name: 'Wellshire Men’s Club', n: 112 },
+  { name: 'Thursday twilight', n: 14 },
+];
+
+/** The "Invite a group" sheet: pick a group, then one button sends it. */
+export function InviteGroupSheet({ picked, rowRef, sendRef, rowHot, sendHot }: { picked: boolean; rowRef?: React.Ref<HTMLDivElement>; sendRef?: React.Ref<HTMLSpanElement>; rowHot?: boolean; sendHot?: boolean }) {
+  return (
+    <div className="iv-sheet-in">
+      <div style={{ width: 38, height: 5, borderRadius: 5, background: '#D8CDBD', margin: '8px auto 10px' }} />
+      <div style={{ padding: '0 16px' }}>
+        <div style={{ fontSize: 19, fontWeight: 800 }}>Invite a group</div>
+        <div style={{ fontSize: 12, color: '#66635E', marginTop: 4 }}>Everyone in the groups you pick is asked “want to play?” for your open seats — the first to say yes get them.</div>
+        <div style={{ fontSize: 14, fontWeight: 700, margin: '14px 0 6px' }}>Your groups</div>
+        <div className="ap-card" style={{ padding: '2px 10px' }}>
+          {GROUPS.map((g, i) => {
+            const on = picked && i === 0;
+            return (
+              <div key={g.name} ref={i === 0 ? rowRef : undefined} className={`gd-hl ${i === 0 && rowHot ? 'hot' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 2px', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
+                <span style={{ width: 20, height: 20, borderRadius: 6, flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: '#171615', background: on ? '#65B683' : 'linear-gradient(#FCFAF7,#EEE6DA)', border: `1px solid ${on ? '#237849' : '#7D7A75'}`, transition: 'background 200ms ease' }}>{on ? '✓' : ''}</span>
+                <span style={{ flex: 1 }}>
+                  <span style={{ fontWeight: 600, display: 'block' }}>{g.name}</span>
+                  <span className="ap-sub">{g.n} golfers</span>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ fontSize: 12, color: '#66635E', minHeight: 16 }}>{picked ? 'Invitations will be sent to these 50 people' : ''}</div>
+      </div>
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '12px 16px 26px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontWeight: 600, color: '#66635E', fontSize: 14 }}>Cancel</span>
+        {picked ? (
+          <span ref={sendRef} className={`ap-btn ${sendHot ? 'ap-pressed' : ''}`}>Invite 50 people</span>
+        ) : (
+          <span className="ap-btn" style={{ background: '#EEE6DA', color: '#AAA7A2', borderColor: '#D8CDBD', boxShadow: 'none' }}>Invite</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Stats: the golfer's own goals ---------- */
+
+const GOALS = [
+  { name: 'Score', value: '86.4', unit: 'average per round', dots: [1, 1, 0, 1, 1, 0, 1], goal: '85', gap: '1.4 to go' },
+  { name: 'Greens in regulation', value: '6.8', unit: 'per round', dots: [0, 1, 0, 1, 1, 0, 1], goal: '8', gap: '1.2 to go' },
+  { name: 'Putts', value: '31.6', unit: 'per round', dots: [1, 1, 1, 0, 1, 1, 1], goal: '32', met: true },
+  { name: 'Fairways hit', value: '7.9', unit: 'per round', dots: [1, 0, 1, 1, 1, 1, 0], goal: '7', met: true },
+];
+
+export function GoalsScreen() {
+  return (
+    <div className="ap">
+      <StatusBar />
+      <div className="ap-top">
+        <div>
+          <div className="ap-title">Statistics</div>
+          <div className="ap-sub">Your last 20 rounds</div>
+        </div>
+      </div>
+      <div className="ap-sec">Goals</div>
+      <div className="ap-body">
+        <div className="ap-card" style={{ padding: '2px 12px' }}>
+          {GOALS.map((g, i) => (
+            <div key={g.name} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', borderTop: i ? '1px solid #EEE6DA' : 'none' }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 700, fontSize: 14 }}>{g.name}</div>
+                <div style={{ fontSize: 12.5, color: '#66635E' }}><b style={{ color: '#171615', fontSize: 15 }}>{g.value}</b> {g.unit}</div>
+                <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
+                  {g.dots.map((d, k) => (
+                    <span key={k} style={{ width: 9, height: 9, borderRadius: 9, background: d ? '#171615' : 'transparent', border: '1.5px solid #171615' }} />
+                  ))}
+                </div>
+              </div>
+              <div style={{ textAlign: 'center', width: 64 }}>
+                <div style={{ border: `1.5px solid ${g.met ? '#C49B38' : '#D8CDBD'}`, background: g.met ? '#FCF4E4' : '#F5F1EA', borderRadius: 10, padding: '4px 0' }}>
+                  <div style={{ fontSize: 9.5, color: '#66635E', fontWeight: 600 }}>Goal</div>
+                  <div style={{ fontSize: 18, fontWeight: 800 }}>{g.goal}</div>
+                </div>
+                <div style={{ fontSize: 11, marginTop: 3, fontWeight: g.met ? 700 : 400, color: g.met ? '#795B02' : '#66635E' }}>{g.met ? 'Goal met' : g.gap}</div>
+              </div>
             </div>
           ))}
         </div>
