@@ -14,7 +14,7 @@ export function Wordmark({
   height?: number;
 }) {
   const file = `/brand/backbeat-${product.toLowerCase()}-lockup${onDark ? '-reversed' : ''}.svg`;
-  const width = Math.round(height * (product === 'Golf' ? 367 : 465) / 64);
+  const width = Math.round(height * (product === 'Golf' ? 329.36 : 465) / 64);
   const alt = product === 'Golf' ? 'Backbeat Golf' : 'Backbeat for Clubs';
   return <img src={file} alt={alt} width={width} height={height} className="block" />;
 }
