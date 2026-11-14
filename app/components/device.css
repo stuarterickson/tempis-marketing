@@ -127,11 +127,16 @@
 @media (max-width: 520px) { .macro { height: 380px; } .macro .dv { transform: scale(1.3); } }
 
 /* The catch: two phones and the dialog between them */
-.catch { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; perspective: 1800px; min-height: 560px; }
+.catch { position: relative; display: grid; grid-template-columns: 1fr 1fr; column-gap: 120px; align-items: center; perspective: 1600px; min-height: 560px; }
+.catch > div:nth-child(1) { justify-self: end; }
+.catch > div:nth-child(2) { justify-self: start; }
+/* the two phones turn in toward each other, as if held up to compare */
+.catch .dv-face-left .dv-stage { transform: rotateY(34deg) rotateX(3deg); }
+.catch .dv-face-right .dv-stage { transform: rotateY(-34deg) rotateX(3deg); }
 .catch .dv { padding: 0 0 40px; }
 .catch-dialog { position: absolute; z-index: 50; left: 50%; top: 46%; width: 300px; margin-left: -150px; transform: translateY(-50%) translateZ(160px) scale(0.92); opacity: 0; transition: opacity 360ms ease, transform 520ms cubic-bezier(.3,1.18,.45,1); }
 .catch-dialog.show { opacity: 1; transform: translateY(-50%) translateZ(160px) scale(1); }
-@media (max-width: 640px) { .catch { min-height: 500px; } .catch .dv-sm .dv-stage { zoom: 0.6; } .catch-dialog { width: 236px; margin-left: -118px; top: 56%; } .catch-dialog .dlg { padding: 12px; } .catch-dialog .dlg-tile b { font-size: 28px; } .catch-dialog .dlg-t { font-size: 16px; } .catch-dialog .dlg-q { font-size: 14px; margin: 8px 0; } }
+@media (max-width: 640px) { .catch { min-height: 500px; column-gap: 20px; } .catch .dv-sm .dv-stage { zoom: 0.6; } .catch-dialog { width: 236px; margin-left: -118px; top: 56%; } .catch-dialog .dlg { padding: 12px; } .catch-dialog .dlg-tile b { font-size: 28px; } .catch-dialog .dlg-t { font-size: 16px; } .catch-dialog .dlg-q { font-size: 14px; margin: 8px 0; } }
 
 .dlg { background: #FCFAF7; color: #171615; border: 1px solid #AAA7A2; border-radius: 16px; padding: 16px; font-family: var(--font-sans); box-shadow: 0 40px 70px -30px rgba(16,48,29,0.6), 0 8px 20px rgba(16,48,29,0.12); }
 .dlg-h { display: flex; align-items: center; gap: 10px; }
@@ -329,3 +334,10 @@
 .pt-text b { font-size: 15.5px; font-weight: 650; color: var(--color-ink); }
 .pt-text span { font-size: 13.5px; color: var(--color-ink-soft); }
 .catch .phone-tag { margin-top: -10px; }
+@media (max-width: 640px) {
+  .catch > div { min-width: 0; }
+  .catch .pt-text span { display: none; }
+  .catch .phone-tag { padding: 4px 12px 4px 4px; gap: 8px; }
+  .catch .pt-mark { width: 28px; height: 28px; font-size: 13px; }
+  .catch .pt-text b { font-size: 14px; }
+}
