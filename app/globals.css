@@ -67,8 +67,9 @@ body {
 
 /* ---------- Header lockup: the animated "From the pin" file, inlined ----------
    32px tall below 768px, 40px from 768px. The beat lives in the SVG's own CSS
-   (one beat every 2.2s, still frame under reduced motion); we only pause it
-   while the header is off screen. */
+   (one beat every 2.2s, still frame under reduced motion). The site plays three
+   beats on the first page of a visit, then shows the still (data-done); it
+   pauses while the header is off screen. */
 .lockup-live {
   display: block;
   height: 32px;
@@ -82,6 +83,14 @@ body {
 .lockup-live[data-paused] .c3l-run,
 .lockup-live[data-paused] .c3d-flag,
 .lockup-live[data-paused] .c3d-run { animation-play-state: paused; }
+.lockup-live[data-done] .c3l-flag,
+.lockup-live[data-done] .c3l-run,
+.lockup-live[data-done] .c3d-flag,
+.lockup-live[data-done] .c3d-run { animation: none; }
+.lockup-live[data-done] .c3l-run,
+.lockup-live[data-done] .c3d-run { opacity: 0; }
+.lockup-live[data-done] .c3l-rest,
+.lockup-live[data-done] .c3d-rest { opacity: 1; }
 
 /* ---------- Buttons: the app's raised controls ---------- */
 .btn {
