@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Device from './Device';
+import PhoneTag from './PhoneTag';
 import { InviteGroupSheet, JimHomeScreen, JimInviteScreen, OpenInviteScreen } from './AppScreens';
 
 /*
@@ -169,7 +170,7 @@ export default function InviteScene() {
             {!still && <div className={`gd-finger ${s.finger ? 'show' : ''} ${s.press ? 'press' : ''}`} style={{ left: last.current.x, top: last.current.y }} />}
           </div>
         </Device>
-        <p className="iv-cap">Dave’s phone</p>
+        <PhoneTag name="Dave’s phone" mark="D" role="Booked Saturday at 8:10" />
       </div>
 
       <div ref={side} aria-hidden className="iv-side">
@@ -201,7 +202,7 @@ export default function InviteScene() {
               <div className={`gd-finger ${s.jimFinger ? 'show' : ''} ${s.jimPress ? 'press' : ''}`} style={{ left: jLast.current.x, top: jLast.current.y }} />
             </div>
           </Device>
-          <p className="iv-cap">Jim’s phone</p>
+          <PhoneTag name="Jim’s phone" mark="J" role="One of the 50" />
         </div>
       )}
 

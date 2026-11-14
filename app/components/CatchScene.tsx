@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Device from './Device';
+import PhoneTag from './PhoneTag';
 import { HoleScreen } from './AppScreens';
 
 /*
@@ -64,7 +65,7 @@ export default function CatchScene() {
             <div className={`gd-finger ${s.finger === 'key' || s.finger === 'save' ? 'show' : ''} ${s.press ? 'press' : ''}`} style={{ left: last.current.x, top: last.current.y }} />
           </div>
         </Device>
-        <p className="catch-who">Tom’s phone</p>
+        <PhoneTag name="Tom’s phone" mark="T" role="Keeping the group’s card" />
       </div>
       <div>
         <Device tilt="face-left" size="sm" label="Bob's phone">
@@ -72,7 +73,7 @@ export default function CatchScene() {
             <HoleScreen rows={[{ name: 'Bob', note: 'Plays off 14', chosen: s.bob }]} />
           </div>
         </Device>
-        <p className="catch-who">Bob’s phone</p>
+        <PhoneTag name="Bob’s phone" mark="B" role="Scoring his own" />
       </div>
       <div className={`catch-dialog ${s.dialog ? 'show' : ''}`} aria-hidden>
         <div className="dlg">

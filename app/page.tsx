@@ -7,6 +7,7 @@ import InviteScene from './components/InviteScene';
 import GoalsScene from './components/GoalsScene';
 import OldScorecard from './components/OldScorecard';
 import GamesList from './components/GamesList';
+import PhoneTag from './components/PhoneTag';
 import Pledges from './components/Pledges';
 import './components/device.css';
 import { Wordmark } from './components/Wordmark';
@@ -94,9 +95,9 @@ export default function Home() {
           <div className="games-stage mt-10 md:mt-14">
             <figure className="old-card">
               <OldScorecard />
-              <figcaption>The old way: pencil, eraser, and an argument at the bar.</figcaption>
+              <figcaption><b className="display">The old way</b><span>Pencil, eraser, and an argument at the bar.</span></figcaption>
             </figure>
-            <div className="new-way"><GamesDemo /></div>
+            <div className="new-way"><GamesDemo /><PhoneTag name="The new way" mark="✓" role="Every game kept, every dollar settled" /></div>
           </div>
           <div className="mt-16 md:mt-20"><GamesList /></div>
         </div>
