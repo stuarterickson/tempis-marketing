@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import SignupForm from '../components/SignupForm';
 import { Wordmark } from '../components/Wordmark';
 
@@ -43,6 +44,10 @@ export default function ClubsPage() {
             </div>
           ))}
         </dl>
+        <p className="text-ink-soft md:col-span-7 md:col-start-6">
+          A player stops on the 11th, a phone dies, a card goes unsigned?{' '}
+          <Link className="link" href="/handled">See how Backbeat handles it</Link>.
+        </p>
       </section>
 
       <section className="border-t border-stone bg-ivory">

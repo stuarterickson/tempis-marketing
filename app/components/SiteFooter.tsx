@@ -25,6 +25,7 @@ export default function SiteFooter() {
           <h2 className="font-sans text-base font-semibold tracking-normal">Help</h2>
           <ul className="mt-3 space-y-2 text-base text-ink-soft">
             <li><Link href="/support" className="hover:text-ink hover:underline">Support</Link></li>
+            <li><Link href="/handled" className="hover:text-ink hover:underline">When a round goes wrong</Link></li>
             <li><a href={SITE.privacyUrl} className="hover:text-ink hover:underline">Privacy</a></li>
             <li><Link href="/delete-account" className="hover:text-ink hover:underline">Delete your account</Link></li>
           </ul>
