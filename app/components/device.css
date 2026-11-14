@@ -310,9 +310,13 @@
 .games-list li { display: flex; gap: 14px; padding: 20px 0 22px; border-bottom: 1px solid var(--color-stone); }
 .gl-ico { flex: none; width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; color: #10301D; background: linear-gradient(#E3F2E7, #CFE9D7); border: 1px solid #B7E0C4; box-shadow: inset 0 1px 0 rgba(255,255,255,.7); transition: transform 300ms cubic-bezier(.3,1.18,.45,1); }
 .games-list li:hover .gl-ico { transform: rotate(-8deg) scale(1.06); }
-.gl-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; }
+.gl-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
 .gl-name { font-size: 1.3125rem; line-height: 1.25; }
-.gl-who { font-size: 0.9375rem; color: var(--color-ink-soft); }
+.gl-who { display: inline-flex; align-items: center; gap: 0; height: 24px; border: 1.5px solid var(--color-ink); border-radius: 7px; overflow: hidden; color: var(--color-ink); position: relative; top: -2px; }
+.gl-pl { display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; height: 100%; }
+.gl-pl + .gl-pl { border-left: 1.5px solid var(--color-ink); padding-left: 0; }
+.gl-pl b { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.gl-or { font-style: normal; font-size: 11px; color: var(--color-ink-soft); padding: 0 7px; margin-right: 4px; align-self: stretch; display: inline-flex; align-items: center; background: #EAF5EC; border-right: 1.5px solid var(--color-ink); }
 .gl-how { margin: 4px 0 0; font-size: 1rem; line-height: 1.45; color: var(--color-ink-soft); }
 @media (max-width: 900px) { .games-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }
 @media (max-width: 560px) { .games-list { grid-template-columns: 1fr; } }
