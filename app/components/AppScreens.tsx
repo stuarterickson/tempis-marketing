@@ -5,6 +5,8 @@
  * Mike −$7, Bill −$7, which is exactly who-pays-whom below.
  */
 
+import { ChevronDown, ChevronLeft, ChevronRight, ClipboardList, Coins, Map as MapIcon, Menu } from 'lucide-react';
+
 export function StatusBar() {
   return (
     <div className="ap-status">
@@ -158,46 +160,18 @@ export function SettleUpScreen() {
   );
 }
 
-function Keys({ chosen, suggested }: { chosen?: number; suggested?: number }) {
-  return (
-    <div className="ap-keys">
-      {[3, 4, 5, 6, 7].map((n) => (
-        <div key={n} className={`ap-key ${n === chosen ? 'on' : !chosen && n === suggested ? 'sg' : ''}`}>{n}</div>
-      ))}
-    </div>
-  );
-}
-
+/** The macro close-up on the opening section: four golfers on hole 7, two keyed in. */
 export function ScoreEntryScreen() {
-  const golfers = [
-    { name: 'Tom Ruiz', hcp: 'Plays off 8', chosen: 4 },
-    { name: 'Dave Keller', hcp: 'Plays off 12', chosen: 5 },
-    { name: 'Mike Sorensen', hcp: 'Plays off 17' },
-    { name: 'Bill Hanley', hcp: 'Plays off 21' },
-  ];
   return (
-    <div className="ap">
-      <StatusBar />
-      <div className="ap-top" style={{ justifyContent: 'space-between' }}>
-        <div>
-          <div className="ap-title">Hole 7</div>
-          <div className="ap-sub">Par 4, 412 yards</div>
-        </div>
-        <span className="ap-btn ap-btn2" style={{ height: 34, fontSize: 13, padding: '0 12px' }}>Games</span>
-      </div>
-      <div className="ap-body">
-        {golfers.map((g) => (
-          <div key={g.name} className="ap-card" style={{ padding: '10px 10px 11px', marginBottom: 8 }}>
-            <div className="ap-card-h"><b style={{ fontSize: 14 }}>{g.name}</b><span className="ap-sub">{g.hcp}</span></div>
-            <Keys chosen={g.chosen} suggested={4} />
-          </div>
-        ))}
-      </div>
-      <div className="ap-foot" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-        <span className="ap-sub">Mike &amp; Bill at par</span>
-        <span className="ap-btn">Save &amp; next</span>
-      </div>
-    </div>
+    <HoleScreen
+      dense={false}
+      rows={[
+        { name: 'Tom Ruiz', note: '8', chosen: 4 },
+        { name: 'Dave Keller', note: '12', chosen: 5 },
+        { name: 'Mike Sorensen', note: '17' },
+        { name: 'Bill Hanley', note: '21' },
+      ]}
+    />
   );
 }
 
@@ -255,35 +229,80 @@ export function GroupCardScreen() {
 
 /* ---------- The catch: one hole, scored on two phones ---------- */
 
-export function HoleScreen({ rows, saveRef, keyRef, pressedSave }: {
+const STRIP = [
+  { n: 3, label: 'Birdie' },
+  { n: 4, label: 'Par' },
+  { n: 5, label: 'Bogey' },
+  { n: 6, label: 'Double' },
+];
+const HOLE_PAR = 4;
+
+/**
+ * The hole screen, as the app draws it: the HOLE badge, par / yards / SI / tees and
+ * View map, the running total and the menu; one card per golfer with his strokes
+ * pill and the Score Strip; Games and Group Scorecard collapsed; Previous and the
+ * save button. A card nobody has keyed shows par suggested (dashed); while some
+ * cards are keyed, an unkeyed card gets a dashed edge. The save reads "Save all
+ * pars" until a key is tapped, then "Save & next".
+ * `note` is the golfer's strokes (the first number in it; none = 0).
+ */
+export function HoleScreen({ rows, saveRef, keyRef, pressedSave, dense }: {
   rows: { name: string; note: string; chosen?: number; keyRefFor?: number }[];
   saveRef?: React.Ref<HTMLSpanElement>;
   keyRef?: React.Ref<HTMLDivElement>;
   pressedSave?: boolean;
+  /** Smaller, with the footer pinned, so three or more golfers fit with Save on screen. Default: 3+ golfers. */
+  dense?: boolean;
 }) {
+  const anyKeyed = rows.some((r) => r.chosen != null);
+  const isDense = dense ?? rows.length >= 3;
   return (
-    <div className="ap">
+    <div className={`ap aph ${isDense ? 'dense' : ''}`}>
       <StatusBar />
-      <div className="ap-top" style={{ justifyContent: 'space-between' }}>
-        <div>
-          <div className="ap-title">Hole 7</div>
-          <div className="ap-sub">Par 4, 412 yards</div>
+      <div className="aph-scroll">
+        <div className="aph-head">
+          <div className="aph-badge"><small>HOLE<ChevronDown strokeWidth={2.5} /></small><b>7</b></div>
+          <div className="aph-hole">
+            <div className="aph-par">Par {HOLE_PAR}</div>
+            <div className="aph-line">412y · SI 5</div>
+            <div className="aph-line">White tees</div>
+            <div className="aph-map"><MapIcon strokeWidth={2} />View map</div>
+          </div>
+          <div className="aph-tot"><b>27 (+1)</b><span>Thru 6</span></div>
+          <div className="aph-menu"><Menu strokeWidth={2} /></div>
+        </div>
+        <div className="aph-cards">
+          {rows.map((g) => {
+            const strokes = g.note.match(/\d+/)?.[0] ?? '0';
+            return (
+              <div key={g.name} className={`aph-card ${anyKeyed && g.chosen == null ? 'open' : ''}`}>
+                <div className="aph-name"><b>{g.name}</b><span className="aph-pill">{strokes}</span></div>
+                <div className="aph-strip">
+                  <span className="aph-end"><ChevronLeft strokeWidth={2} /></span>
+                  {STRIP.map((k) => (
+                    <div key={k.n} ref={g.keyRefFor === k.n ? keyRef : undefined}
+                      className={`aph-key ${k.n === g.chosen ? 'on' : g.chosen == null && k.n === HOLE_PAR ? 'sg' : ''}`}>
+                      <b>{k.n}</b><small>{k.label.toUpperCase()}</small>
+                    </div>
+                  ))}
+                  <span className="aph-end"><ChevronRight strokeWidth={2} /></span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="aph-rows">
+          <div className="aph-row"><Coins strokeWidth={2} /><div><small>Games</small><b>2 games</b></div><ChevronDown className="aph-down" strokeWidth={2.25} /></div>
+          <div className="aph-row"><ClipboardList strokeWidth={2} /><div><small>Group Scorecard</small><b>Hole by hole</b></div><ChevronDown className="aph-down" strokeWidth={2.25} /></div>
         </div>
       </div>
-      <div className="ap-body">
-        {rows.map((g) => (
-          <div key={g.name} className="ap-card" style={{ padding: '10px 10px 11px', marginBottom: 8 }}>
-            <div className="ap-card-h"><b style={{ fontSize: 14 }}>{g.name}</b><span className="ap-sub">{g.note}</span></div>
-            <div className="ap-keys">
-              {[3, 4, 5, 6, 7].map((n) => (
-                <div key={n} ref={g.keyRefFor === n ? keyRef : undefined}
-                  className={`ap-key ${n === g.chosen ? 'on' : !g.chosen && n === 4 ? 'sg' : ''}`}>{n}</div>
-              ))}
-            </div>
-          </div>
-        ))}
+      <div className="aph-foot">
+        <div className="aph-btns">
+          <span className="aph-btn aph-prev">Previous</span>
+          <span ref={saveRef} className={`aph-btn aph-save ${pressedSave ? 'ap-pressed' : ''}`}>{anyKeyed ? 'Save & next' : 'Save all pars'}</span>
+        </div>
+        <div className="aph-where">Sat · Wellshire Golf Course</div>
       </div>
-      <div className="ap-foot"><span ref={saveRef} className={`ap-btn ${pressedSave ? 'ap-pressed' : ''}`}>Save &amp; next</span></div>
     </div>
   );
 }
