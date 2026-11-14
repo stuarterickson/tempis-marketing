@@ -21,7 +21,7 @@ export default function ClubsPage() {
     <>
       <section className="bg-graphite text-on-dark">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <Wordmark product="Clubs" onDark height={34} />
+          <Wordmark product="Clubs" onDark height={28} />
           <h1 className="mt-8 max-w-3xl text-[2.5rem] font-semibold leading-[1.08] tracking-tight md:text-[3.25rem]">
             Your board runs the season. Your members just play.
           </h1>

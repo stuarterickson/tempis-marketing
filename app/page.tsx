@@ -162,7 +162,7 @@ export default function Home() {
       <section aria-labelledby="studio-heading" className="bg-graphite text-on-dark">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-12 md:px-8 md:py-28">
           <div className="md:col-span-6">
-            <Wordmark product="Clubs" onDark height={34} />
+            <Wordmark product="Clubs" onDark height={28} />
             <h2 id="studio-heading" className="mt-8 text-[2.25rem] leading-[1.08] md:text-[3.25rem]">
               Your board runs the season. Your members just play.
             </h2>

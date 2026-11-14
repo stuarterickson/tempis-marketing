@@ -66,18 +66,19 @@ body {
 }
 
 /* ---------- Header lockup: the animated "From the pin" file, inlined ----------
-   32px tall below 768px, 40px from 768px. The beat lives in the SVG's own CSS
+   26px tall below 768px, 32.5px from 768px (the file is cropped to the drawing; the same
+   size as the 32 / 40px uncropped file before). The beat lives in the SVG's own CSS
    (one beat every 2.2s, still frame under reduced motion). The site plays three
    beats on the first page of a visit, then shows the still (data-done); it
    pauses while the header is off screen. */
 .lockup-live {
   display: block;
-  height: 32px;
-  aspect-ratio: 329.36 / 64;
+  height: 26px;
+  aspect-ratio: 329.36 / 52;
 }
 .lockup-live svg { display: block; width: 100%; height: 100%; }
 @media (min-width: 768px) {
-  .lockup-live { height: 40px; }
+  .lockup-live { height: 32.5px; }
 }
 .lockup-live[data-paused] .c3l-flag,
 .lockup-live[data-paused] .c3l-run,

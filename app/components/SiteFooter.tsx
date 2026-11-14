@@ -7,7 +7,7 @@ export default function SiteFooter() {
     <footer className="border-t-2 border-ink bg-oat text-ink">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         <div>
-          <Wordmark height={30} />
+          <Wordmark height={24} />
           <p className="mt-4 max-w-sm text-base text-ink-soft">
             Made in Denver by {SITE.company}, for golfers who’d rather play the round than tally it.
           </p>

@@ -7,14 +7,14 @@
 export function Wordmark({
   product = 'Golf',
   onDark = false,
-  height = 36,
+  height = 29,
 }: {
   product?: 'Golf' | 'Clubs';
   onDark?: boolean;
   height?: number;
 }) {
   const file = `/brand/backbeat-${product.toLowerCase()}-lockup${onDark ? '-reversed' : ''}.svg`;
-  const width = Math.round(height * (product === 'Golf' ? 329.36 : 411.61) / 64);
+  const width = Math.round(height * (product === 'Golf' ? 329.36 : 411.61) / 52);
   const alt = product === 'Golf' ? 'Backbeat Golf' : 'Backbeat for Clubs';
   return <img src={file} alt={alt} width={width} height={height} className="block" />;
 }
