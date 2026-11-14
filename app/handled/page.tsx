@@ -6,7 +6,7 @@ import { SITE } from '../site';
 export const metadata: Metadata = {
   title: 'When the round doesn’t go to plan',
   description:
-    'How Backbeat Golf handles a player who stops mid-round, a dead phone, an unsigned card and a score found wrong after signing — and who decides.',
+    'How Backbeat Golf handles a player who stops mid-round, a dead phone, an unsigned card, a wrong score, season-long competitions and rounds cut short by darkness, and who decides.',
 };
 
 /*
@@ -18,6 +18,8 @@ type Problem = {
   id: string;
   question: string;
   answer: string;
+  /** Not in the app yet: decided and being built. Shows a "Coming" tag. */
+  coming?: boolean;
   detail: Array<string | { rulings: Array<{ when: string; then: string }> }>;
 };
 
@@ -27,6 +29,7 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
     problems: [
       {
         id: 'player-stops',
+        coming: true,
         question: 'A player has to stop partway through a round.',
         answer:
           'They withdraw in the app and say why. Their score comes off the leaderboard, and the tournament director sees when and why they stopped.',
@@ -59,6 +62,7 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
       },
       {
         id: 'wrong-score',
+        coming: true,
         question: 'A score turns out to be wrong after the card is signed.',
         answer:
           'Only the tournament director can change a signed card. Backbeat shows the Rules of Golf ruling first, and the director makes the call.',
@@ -78,6 +82,7 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
       },
       {
         id: 'unfinished-cards',
+        coming: true,
         question: 'The results are ready, but some cards aren’t.',
         answer:
           'Backbeat names every unfinished card before the director finalizes. Finalize anyway, and those players get no placing.',
@@ -85,6 +90,32 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
           'Before finalizing, the director sees each card that’s missing holes or a signature, by name.',
           'They can complete, withdraw or disqualify each one first. They don’t have to.',
           'If they finalize anyway, those players get no placing. An unfinished card never beats a finished one.',
+        ],
+      },
+      {
+        id: 'withdrawn-or-dq-season',
+        coming: true,
+        question: 'A player withdraws or is disqualified. What about season-long competitions?',
+        answer:
+          'Holes played honestly count. A disqualification takes the whole round out.',
+        detail: [
+          'Withdrawn: no placing in the event, but every hole they finished still counts for Season Long Best Ball, skins and closest to the pin, and the event counts as one they played in the season points race.',
+          'Disqualified: nothing from that round counts anywhere: no placing, no Best Ball holes, no skins, no closest to the pin and no season points.',
+          'If the tournament director reinstates the card, everything comes back as if it never happened.',
+        ],
+      },
+      {
+        id: 'darkness',
+        coming: true,
+        question: 'Some groups can’t finish before dark.',
+        answer:
+          'The tournament director tells Backbeat how to settle it, once, and Backbeat applies it to the results, skins, closest to the pin and Best Ball.',
+        detail: [
+          'There are three choices. Finish another day, which the Rules of Golf prefer. Cancel the round, where everyone’s scores for the day are cancelled and side-game money is returned. Or count only the holes everyone finished, the one Backbeat suggests when finishing another day isn’t practical.',
+          'Counting the holes everyone finished works with shotgun starts too: Backbeat finds exactly which holes every player completed and scores everyone on those.',
+          'Skins on holes not everyone reached are void, and their share goes to the holes that count. A closest-to-the-pin hole that not every group reached is void, and its money is returned.',
+          'Season Long Best Ball keeps every hole actually played, unless the round is cancelled.',
+          'A club can set its choice before the event, so everyone knows the rule before they tee off.',
         ],
       },
     ],
@@ -99,6 +130,7 @@ export default function HandledPage() {
       <p className="mt-4 text-[1.1875rem] text-ink-soft">
         Players get hurt, phones die, cards go unsigned, and a stroke turns up two days later. Here’s how Backbeat handles each one, and who decides.
       </p>
+      <p className="mt-3 text-ink-soft">Answers marked <span className="font-semibold">Coming</span> are decided and being built now.</p>
 
       <div className="mt-8 border-l-2 border-fairway pl-5">
         <p className="font-semibold">Our rule of thumb</p>
@@ -113,7 +145,14 @@ export default function HandledPage() {
           <ul className="mt-4 divide-y divide-stone border-y border-stone">
             {section.problems.map((p) => (
               <li key={p.id} id={p.id} className="scroll-mt-28 py-6">
-                <h3 className="text-[1.25rem] font-bold leading-snug">{p.question}</h3>
+                <h3 className="text-[1.25rem] font-bold leading-snug">
+                  {p.question}
+                  {p.coming ? (
+                    <span className="ml-2 inline-block translate-y-[-0.15em] rounded-full border border-stone px-2.5 py-0.5 align-middle text-sm font-semibold text-ink-soft">
+                      Coming
+                    </span>
+                  ) : null}
+                </h3>
                 <p className="mt-2 text-ink-soft">{p.answer}</p>
                 <details className="group mt-3">
                   <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 font-semibold text-fairway hover:text-fairway-dark [&::-webkit-details-marker]:hidden">
