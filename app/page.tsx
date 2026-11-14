@@ -6,10 +6,11 @@ import CatchScene from './components/CatchScene';
 import InviteScene from './components/InviteScene';
 import GoalsScene from './components/GoalsScene';
 import OldScorecard from './components/OldScorecard';
+import GamesList from './components/GamesList';
 import Pledges from './components/Pledges';
 import './components/device.css';
 import { Wordmark } from './components/Wordmark';
-import { SIDE_GAMES, SITE } from './site';
+import { SITE } from './site';
 
 const STEPS = [
   { title: 'Get the app', body: 'Free on iPhone and Android. Sign in with your email.' },
@@ -97,11 +98,7 @@ export default function Home() {
             </figure>
             <div className="new-way"><GamesDemo /></div>
           </div>
-          <ul className="mt-14 grid grid-cols-2 border-t-2 border-ink sm:grid-cols-3 md:grid-cols-6">
-            {SIDE_GAMES.map((g) => (
-              <li key={g} className="display border-b border-stone py-3 pr-3 text-[1.1875rem] leading-snug">{g}</li>
-            ))}
-          </ul>
+          <div className="mt-16 md:mt-20"><GamesList /></div>
         </div>
       </section>
 
