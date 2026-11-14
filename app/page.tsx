@@ -52,7 +52,7 @@ export default function Home() {
           <div className="md:col-span-6">
             <h1 className="text-[3.25rem] leading-[1.0] md:text-[5rem] md:leading-[0.98]">{SITE.tagline}</h1>
             <p className="mt-7 max-w-lg text-[1.25rem] leading-relaxed text-ink-soft">
-              Backbeat Golf keeps score for your group with big keys built for a moving cart and a gloved hand. Par is already suggested for every golfer, so if the whole group made par, one tap saves the hole. Free on iPhone and Android.
+              Backbeat Golf keeps score for your group with big keys you can hit from a bouncing cart, without your reading glasses. Par is already suggested for every golfer, so if the whole group made par, one tap saves the hole. Free on iPhone and Android.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/beta" className="btn btn-primary">Join the beta</Link>
