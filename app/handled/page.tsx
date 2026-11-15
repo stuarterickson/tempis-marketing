@@ -29,7 +29,6 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
     problems: [
       {
         id: 'player-stops',
-        coming: true,
         question: 'A player has to stop partway through a round.',
         answer:
           'They withdraw in the app and say why. Their score comes off the leaderboard, and the tournament director sees when and why they stopped.',
@@ -62,7 +61,6 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
       },
       {
         id: 'wrong-score',
-        coming: true,
         question: 'A score turns out to be wrong after the card is signed.',
         answer:
           'Only the tournament director can change a signed card. Backbeat shows the Rules of Golf ruling first, and the director makes the call.',
@@ -82,7 +80,6 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
       },
       {
         id: 'unfinished-cards',
-        coming: true,
         question: 'The results are ready, but some cards aren’t.',
         answer:
           'Backbeat names every unfinished card before the director finalizes. Finalize anyway, and those players get no placing.',
@@ -94,7 +91,6 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
       },
       {
         id: 'withdrawn-or-dq-season',
-        coming: true,
         question: 'A player withdraws or is disqualified. What about season-long competitions?',
         answer:
           'Holes played honestly count. A disqualification takes the whole round out.',
@@ -106,7 +102,6 @@ const SECTIONS: Array<{ title: string; problems: Problem[] }> = [
       },
       {
         id: 'darkness',
-        coming: true,
         question: 'Some groups can’t finish before dark.',
         answer:
           'The tournament director tells Backbeat how to settle it, once, and Backbeat applies it to the results, skins, closest to the pin and Best Ball.',
@@ -130,7 +125,6 @@ export default function HandledPage() {
       <p className="mt-4 text-[1.1875rem] text-ink-soft">
         Players get hurt, phones die, cards go unsigned, and a stroke turns up two days later. Here’s how Backbeat handles each one, and who decides.
       </p>
-      <p className="mt-3 text-ink-soft">Answers marked <span className="font-semibold">Coming</span> are decided and being built now.</p>
 
       <div className="mt-8 border-l-2 border-fairway pl-5">
         <p className="font-semibold">Our rule of thumb</p>
